@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fechas Dobles 2026 — Grupo Newsan | BI Planning MLA</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --yellow:#FFE600;--navy:#1D2D50;--navy-dark:#162340;--navy-light:#2A3F6F;--navy-nav:#1a2d50;
+  --blue:#3483FA;--blue-bg:#E3F2FD;--green:#00A650;--green-bg:#E8F5E9;
+  --red:#E53935;--red-bg:#FFEBEE;--orange:#F57C00;--orange-bg:#FFF3E0;
+  --bg:#F0F2F5;--bg-alt:#F8F9FB;--card-bg:#FFFFFF;--ink:#1A1A1A;--text:#333333;
+  --muted:#616161;--light:#9E9E9E;--border:#E0E0E0;--border-soft:#EDEEF1;
+  --shadow:0 2px 8px rgba(0,0,0,.08);--shadow-lg:0 8px 24px rgba(0,0,0,.10);
+  --radius:10px;--radius-sm:6px;--radius-pill:999px;--transition:all 0.2s ease;
+  --font:'Proxima Nova','Nunito Sans',system-ui,sans-serif;
+  --primary:#1D2D50;--accent:#FFE600;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+
+.page-header{background:var(--navy-nav);padding:20px 48px 22px;border-bottom:3px solid var(--accent)}
+.header-brand{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.header-title{font-size:24px;font-weight:800;color:#fff}
+.header-title .acc{color:var(--accent)}
+.header-sub{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge-nrt{background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:var(--radius-pill)}
+.badge-ts{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:10px;padding:2px 8px;border-radius:var(--radius-pill)}
+
+.tabs-bar{background:var(--navy-dark);padding:0 40px;display:flex;gap:2px;overflow-x:auto}
+.tab{padding:11px 20px;font-size:13px;font-weight:700;color:rgba(255,255,255,.5);cursor:pointer;
+  border-bottom:3px solid transparent;background:none;border-top:none;border-left:none;border-right:none;
+  transition:var(--transition);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.tab:hover{color:#fff;background:rgba(255,255,255,.06)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tag-nrt{font-size:9px;background:var(--orange);color:#fff;padding:1px 5px;border-radius:3px;font-weight:700}
+
+.slide{display:none}.slide.active{display:block}
+.container{max-width:1320px;margin:0 auto;padding:24px 48px 56px}
+
+.warn-nrt{background:var(--orange-bg);border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;
+  padding:10px 16px;margin-bottom:20px;font-size:12px;color:var(--orange);font-weight:600;display:flex;align-items:center;gap:8px}
+
+.sec-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+
+/* KPIs */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.kpi-grid-3{grid-template-columns:repeat(3,1fr);max-width:720px}
+.kpi-grid-4{grid-template-columns:repeat(4,1fr);max-width:960px}
+.kpi-card{background:var(--card-bg);border-radius:var(--radius);padding:15px 18px;
+  box-shadow:var(--shadow);border:1px solid var(--border-soft);border-top:3px solid var(--accent)}
+.kpi-card.b{border-top-color:var(--blue)}
+.kpi-card.g{border-top-color:var(--green)}
+.kpi-card.o{border-top-color:var(--orange)}
+.kpi-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.kpi-val{font-size:22px;font-weight:800;color:var(--ink);line-height:1}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:3px}
+
+/* Comparaciones */
+.cmp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.cmp-card{background:var(--card-bg);border-radius:var(--radius);padding:14px 15px;box-shadow:var(--shadow);border:1px solid var(--border-soft)}
+.cmp-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.cmp-ref{font-size:10px;color:var(--light);margin-bottom:8px}
+.cmp-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border-soft)}
+.cmp-row:last-child{border-bottom:none}
+.cmp-lbl{font-size:11px;color:var(--text)}
+.cmp-v{font-size:13px;font-weight:700}
+.pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--muted)}
+.partial-mark{font-size:9px;color:var(--orange);font-weight:700}
+.gap-row{background:var(--bg-alt);margin:0 -15px 0;padding:5px 15px;border-top:1px solid var(--border-soft)!important;border-bottom:none!important}
+.gap-row:last-child{margin-bottom:-14px}
+.gap-lbl{font-weight:700;color:var(--ink)!important;font-size:11px}
+
+/* Charts */
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:22px}
+.chart-card{background:var(--card-bg);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);border:1px solid var(--border-soft)}
+.chart-ttl{font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+
+/* Tablas */
+.tables-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tbl-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border-soft);overflow:hidden}
+.tbl-head{padding:11px 14px;border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:center}
+.tbl-head-ttl{font-size:12px;font-weight:700;color:var(--ink)}
+.tbl-head-sub{font-size:11px;color:var(--muted)}
+table{width:100%;border-collapse:collapse}
+th{background:var(--primary);color:#fff;padding:8px 11px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+th.r{text-align:right}
+td{padding:7px 11px;border-bottom:1px solid var(--border-soft);font-size:12px;color:var(--ink)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--bg-alt)}
+td.num{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+td.rk{color:var(--muted);font-size:11px;font-weight:700;width:22px}
+td.sh{color:var(--blue);font-weight:700;text-align:right}
+.item-ttl{display:block;font-size:12px;max-width:270px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-id{display:block;font-size:10px;color:var(--muted)}
+
+.footnote{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.6}
+
+/* BPC */
+.bpc-section{margin-top:24px}
+.bpc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.bpc-bar-card{background:var(--card-bg);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);border:1px solid var(--border-soft)}
+.bpc-brand-row{display:grid;grid-template-columns:70px 1fr 80px;align-items:center;gap:8px;margin-bottom:10px}
+.bpc-brand-row:last-child{margin-bottom:0}
+.bpc-brand-lbl{font-size:11px;font-weight:700;color:var(--ink)}
+.bpc-bar-wrap{height:16px;border-radius:4px;overflow:hidden;display:flex;background:var(--border-soft)}
+.bpc-bar-exp{background:var(--red);height:100%}
+.bpc-bar-near{background:#FFC107;height:100%}
+.bpc-bar-cheap{background:var(--green);height:100%}
+.bpc-bar-meta{font-size:10px;color:var(--muted);text-align:right;white-space:nowrap}
+.bpc-legend{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.bpc-leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)}
+.bpc-leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.bpc-avg-tag{font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--radius-pill)}
+.bpc-avg-tag.neg{background:var(--red-bg);color:var(--red)}
+.bpc-avg-tag.pos{background:var(--green-bg);color:var(--green)}
+
+@media(max-width:900px){
+  .container{padding:16px 20px 32px}
+  .kpi-grid{grid-template-columns:repeat(3,1fr)}
+  .cmp-grid{grid-template-columns:repeat(2,1fr)}
+  .charts-row,.tables-row{grid-template-columns:1fr}
+  .page-header{padding:16px 20px}
+  .tabs-bar{padding:0 12px}
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-brand">BI Planning MLA · Grupo Newsan · 2026</div>
+  <h1 class="header-title">Fechas <span class="acc">Dobles</span> 2026</h1>
+  <div class="header-sub">
+    Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07
+    <span class="badge-nrt">⚡ 7/7 = NRT (día en curso)</span>
+    <span class="badge-ts">Fuente: BT_ORDERS_MLA · BT_ORDERS_MLA_NRT</span>
+  </div>
+</header>
+
+<nav class="tabs-bar" id="tabs" style="justify-content:space-between;align-items:center">
+  <div style="display:flex;gap:2px">
+    <button class="tab active" data-fd="0">1/1</button>
+    <button class="tab" data-fd="1">2/2</button>
+    <button class="tab" data-fd="2">3/3</button>
+    <button class="tab" data-fd="3">4/4</button>
+    <button class="tab" data-fd="4">5/5</button>
+    <button class="tab" data-fd="5">6/6</button>
+    <button class="tab" data-fd="6">7/7 <span class="tag-nrt">⚡NRT</span></button>
+  </div>
+  <div style="display:flex;gap:4px;padding-right:16px;align-items:center">
+    <span style="font-size:10px;color:rgba(255,255,255,.45);margin-right:4px;text-transform:uppercase;letter-spacing:.06em">Scope</span>
+    <button id="scope-btn-total" onclick="switchScope('total')"
+      style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid rgba(255,255,255,.7);background:rgba(255,255,255,.9);color:var(--navy-dark);cursor:pointer">Total MLA</button>
+    <button id="scope-btn-ce" onclick="switchScope('ce')"
+      style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid rgba(255,255,255,.4);background:transparent;color:rgba(255,255,255,.6);cursor:pointer">CE</button>
+  </div>
+</nav>
+
+<div id="slides"></div>
+
+<script>
+/*%%FECHAS_START%%*/
+const FECHAS=[
+{
+    fd:'1/1',label:'1 Enero 2026',fecha:'2026-01-01',nrt:false,
+    site:{nmv:25.396,nsi:517100},
+    ns:{nmv:350.65,nsi:1667,part:1.381},
+    yoy:{snmv:65.5,snsi:40.4,nnmv:184.0,nnsi:230.8,partial:false},
+    mom:{snmv:null,snsi:null,nnmv:null,nnsi:null,ref:'—'},
+    da:{snmv:13.5,snsi:20.6,nnmv:-10.0,nnsi:-15.1,ref:'vs 31/12/2025'},
+    sa:{snmv:-2.8,snsi:-6.2,nnmv:7.5,nnsi:1.3,ref:'vs 25/12/2025'},
+    ce:{site:{nmv:7.582,nsi:62300},ns:{nmv:282.95,nsi:1055},yoy:{snmv:73.6,snsi:37.8,nnmv:159.5,nnsi:182.8,partial:false},mom:{snmv:null,snsi:null,nnmv:null,nnsi:null,ref:'—'},da:{snmv:4.2,snsi:8.9,nnmv:-10.3,nnsi:-19.7,ref:'vs 31/12/2025'},sa:{snmv:-0.3,snsi:-11.3,nnmv:9.3,nnsi:7.0,ref:'vs 25/12/2025'}},
+    cats:[
+      {c:'Large Appliances',nmv:120.04,nsi:259,sh:34.23},
+      {c:'Heating, Cooling & Air Quality',nmv:110.02,nsi:370,sh:31.38},
+      {c:'Small Appliances',nmv:27.98,nsi:362,sh:7.98},
+      {c:'Televisions & Streaming',nmv:19.63,nsi:36,sh:5.60},
+      {c:'Home Outdoors',nmv:13.74,nsi:78,sh:3.92},
+      {c:'Mattresses & Sommier',nmv:8.92,nsi:42,sh:2.54},
+      {c:'Furniture',nmv:8.73,nsi:76,sh:2.49},
+      {c:'Toys and Games',nmv:8.44,nsi:91,sh:2.41},
+      {c:'Construction',nmv:8.27,nsi:30,sh:2.36},
+      {c:'Audio & General Electronics',nmv:3.15,nsi:11,sh:0.90}
+    ],
+    items:[
+      {id:'MLA1570146063',t:'Aire Acondicionado Portátil Sansei Frío/calor 2650w 2279fg',nmv:21.28,nsi:38,sh:6.07},
+      {id:'MLA2052367700',t:'Lavarropas Automático Carga Superior Philco 5.5 Kg 750 Rpm Gris',nmv:19.84,nsi:57,sh:5.66},
+      {id:'MLA2063708488',t:'Heladera Philco Phsb470xd2 Side By Side 4 Puertas No Frost 385l Inox',nmv:18.75,nsi:17,sh:5.35},
+      {id:'MLA2428777022',t:'Aire Acondicionado Sansei Split Frío Calor 2924 Frigorías 3400 Watts',nmv:14.51,nsi:23,sh:4.14},
+      {id:'MLA2322186476',t:'Aire Acondicionado Sansei Split Frio/calor 2365 Frigorías Sas25ha4cn',nmv:14.03,nsi:23,sh:4.00},
+      {id:'MLA1627399738',t:'Climatizador De Aire Philco Phcp07cin 7 Lts 3 Velocidades Blanco',nmv:8.82,nsi:76,sh:2.51},
+      {id:'MLA1576939125',t:'Lavasecarropas Philco Carga Frontal 12/8 Kg Inverter Gris Silver',nmv:8.55,nsi:9,sh:2.44},
+      {id:'MLA2125899232',t:'Freídora De Aire Atma 7.5 Litros Panel Táctil Digital 1800w Blanca',nmv:8.55,nsi:95,sh:2.44},
+      {id:'MLA1484246115',t:'Ventilador De Pie Philco Vpip2623p Industrial 26 Pulgadas',nmv:7.69,nsi:57,sh:2.19},
+      {id:'MLA2512474330',t:'Pileta De Lona Redonda Inflable Philco 3818 Lts. Azul',nmv:6.40,nsi:64,sh:1.83}
+    ]
+  },
+  {
+    fd:'2/2',label:'2 Febrero 2026',fecha:'2026-02-02',nrt:false,
+    site:{nmv:61.891,nsi:1277900},
+    ns:{nmv:516.57,nsi:2637,part:0.835},
+    yoy:{snmv:180.3,snsi:131.5,nnmv:82.2,nnsi:110.8,partial:false},
+    mom:{snmv:143.7,snsi:147.1,nnmv:47.3,nnsi:58.2,ref:'vs 1/1/2026'},
+    da:{snmv:86.2,snsi:65.2,nnmv:97.8,nnsi:74.6,ref:'vs 01/02/2026'},
+    sa:{snmv:29.6,snsi:21.1,nnmv:21.9,nnsi:20.9,ref:'vs 26/01/2026'},
+    ce:{site:{nmv:18.997,nsi:155400},ns:{nmv:421.56,nsi:1301},yoy:{snmv:186.5,snsi:153.9,nnmv:66.1,nnsi:36.4,partial:false},mom:{snmv:150.6,snsi:149.4,nnmv:49.0,nnsi:23.3,ref:'vs 1/1/2026'},da:{snmv:110.6,snsi:95.0,nnmv:119.9,nnsi:122.0,ref:'vs 01/02/2026'},sa:{snmv:41.8,snsi:22.1,nnmv:31.6,nnsi:39.6,ref:'vs 26/01/2026'}},
+    cats:[
+      {c:'Large Appliances',nmv:190.70,nsi:370,sh:36.92},
+      {c:'Heating, Cooling & Air Quality',nmv:97.63,nsi:379,sh:18.90},
+      {c:'Televisions & Streaming',nmv:88.73,nsi:146,sh:17.18},
+      {c:'Small Appliances',nmv:29.94,nsi:312,sh:5.80},
+      {c:'Home Outdoors',nmv:27.26,nsi:286,sh:5.28},
+      {c:'Mountain & Outdoors',nmv:16.00,nsi:318,sh:3.10},
+      {c:'Industry',nmv:8.10,nsi:50,sh:1.57},
+      {c:'Furniture',nmv:5.81,nsi:54,sh:1.12},
+      {c:'Tools',nmv:5.61,nsi:72,sh:1.09},
+      {c:'Construction',nmv:4.81,nsi:9,sh:0.93}
+    ],
+    items:[
+      {id:'MLA1458328215',t:'Heladera Philco One Door Cíclica Con Dispenser 161l Plata Phsd179pd2',nmv:26.62,nsi:64,sh:5.15},
+      {id:'MLA2052367700',t:'Lavarropas Automático Carga Superior Philco 5.5 Kg 750 Rpm Gris',nmv:24.48,nsi:60,sh:4.74},
+      {id:'MLA1576939125',t:'Lavasecarropas Philco Carga Frontal 12/8 Kg Inverter Color Gris Silver',nmv:14.52,nsi:13,sh:2.81},
+      {id:'MLA1518712281',t:'Heladera Philco Top Mount No Frost 174l Blanca Phnt198b2',nmv:11.44,nsi:22,sh:2.21},
+      {id:'MLA2428777022',t:'Aire Acondicionado Sansei Split Frío Calor 2924 Frigorías 3400 Watts',nmv:9.61,nsi:15,sh:1.86},
+      {id:'MLA1949182044',t:'Freezer Vertical Siam Fsi-cv065b 65 Litros Blanco',nmv:9.15,nsi:32,sh:1.77},
+      {id:'MLA2125964410',t:'Freídora De Aire Atma 7.5 Litros Panel Táctil Digital 1800w Negra',nmv:8.55,nsi:77,sh:1.65},
+      {id:'MLA2073687978',t:'Lavarropas Automático Carga Superior Philco 5.5 Kg 750 Rpm Gris',nmv:7.90,nsi:17,sh:1.53},
+      {id:'MLA2239423850',t:'Aire Acondicionado Split Inverter Frio Calor Siam 3053 Frigorias Blanco',nmv:7.70,nsi:10,sh:1.49},
+      {id:'MLA1612952653',t:'Televisor LG OLED Evo AI 83" Smart 4K OLED83C5PSA',nmv:6.75,nsi:1,sh:1.31}
+    ]
+  },
+  {
+    fd:'3/3',label:'3 Marzo 2026',fecha:'2026-03-03',nrt:false,
+    site:{nmv:61.502,nsi:1271700},
+    ns:{nmv:635.70,nsi:2851,part:1.034},
+    yoy:{snmv:154.6,snsi:112.2,nnmv:306.0,nnsi:133.1,partial:false},
+    mom:{snmv:-0.6,snsi:-0.5,nnmv:23.1,nnsi:8.1,ref:'vs 2/2/2026'},
+    da:{snmv:19.6,snsi:12.4,nnmv:73.5,nnsi:49.7,ref:'vs 02/03/2026'},
+    sa:{snmv:30.6,snsi:15.1,nnmv:66.6,nnsi:34.2,ref:'vs 24/02/2026'},
+    ce:{site:{nmv:20.042,nsi:162500},ns:{nmv:556.48,nsi:1703},yoy:{snmv:179.9,snsi:127.0,nnmv:329.7,nnsi:119.5,partial:false},mom:{snmv:5.5,snsi:4.6,nnmv:32.0,nnsi:30.9,ref:'vs 2/2/2026'},da:{snmv:35.0,snsi:19.3,nnmv:76.2,nnsi:59.5,ref:'vs 02/03/2026'},sa:{snmv:51.9,snsi:27.5,nnmv:75.6,nnsi:51.4,ref:'vs 24/02/2026'}},
+    cats:[
+      {c:'Large Appliances',nmv:251.49,nsi:487,sh:39.56},
+      {c:'Televisions & Streaming',nmv:137.97,nsi:242,sh:21.70},
+      {c:'Heating, Cooling & Air Quality',nmv:112.19,nsi:414,sh:17.65},
+      {c:'Small Appliances',nmv:35.06,nsi:397,sh:5.52},
+      {c:'Home Outdoors',nmv:13.54,nsi:170,sh:2.13},
+      {c:'Furniture',nmv:11.99,nsi:89,sh:1.89},
+      {c:'Computers & Notebooks',nmv:9.73,nsi:28,sh:1.53},
+      {c:'Industry',nmv:6.45,nsi:33,sh:1.01},
+      {c:'Tools',nmv:6.29,nsi:107,sh:0.99},
+      {c:'Audio & General Electronics',nmv:6.09,nsi:68,sh:0.96}
+    ],
+    items:[
+      {id:'MLA2052367700',t:'Lavarropas Automático Carga Superior Philco 5.5 Kg 750 Rpm Gris',nmv:37.03,nsi:90,sh:5.83},
+      {id:'MLA1489184733',t:'Lavasecarropas Inverter Philco Phls128t Carga Frontal 12kg/8kg 1200 Rpm Gris',nmv:30.80,nsi:28,sh:4.85},
+      {id:'MLA1574380981',t:'Smart TV 65" Toshiba 65c450ns Google TV 4K LED',nmv:20.06,nsi:23,sh:3.16},
+      {id:'MLA1470009383',t:'Heladera Siam Top Mount Cíclica 244l Blanca Hsi-ct260b',nmv:15.95,nsi:29,sh:2.51},
+      {id:'MLA2073687978',t:'Lavarropas Automático Carga Superior Philco 5.5 Kg 750 Rpm Gris',nmv:15.61,nsi:33,sh:2.46},
+      {id:'MLA2428777022',t:'Aire Acondicionado Sansei Split Frío Calor 2924 Frigorías 3400 Watts',nmv:12.98,nsi:22,sh:2.04},
+      {id:'MLA1780439290',t:'Termotanque Eléctrico 1500w Philco Phte030b2 30lts Blanco',nmv:12.41,nsi:62,sh:1.95},
+      {id:'MLA2312123460',t:'Smart TV HQS Hqs50x6500 50 Pulgadas 4K LED',nmv:12.26,nsi:23,sh:1.93},
+      {id:'MLA2779034700',t:'Aire Acondicionado Split Whirlpool Inverter Frío/calor 3010 Frigorías',nmv:11.10,nsi:15,sh:1.75},
+      {id:'MLA2061041968',t:'Lavasecarropas Inverter Philco Phls128t Carga Frontal 12kg/8kg Blanco',nmv:10.60,nsi:10,sh:1.67}
+    ]
+  },
+  {
+    fd:'4/4',label:'4 Abril 2026',fecha:'2026-04-04',nrt:false,
+    site:{nmv:36.463,nsi:746100},
+    ns:{nmv:465.23,nsi:2381,part:1.276},
+    yoy:{snmv:9.0,snsi:-2.3,nnmv:91.8,nnsi:129.4,partial:false},
+    mom:{snmv:-40.7,snsi:-41.3,nnmv:-26.8,nnsi:-16.5,ref:'vs 3/3/2026'},
+    da:{snmv:17.8,snsi:11.6,nnmv:67.0,nnsi:85.9,ref:'vs 03/04/2026'},
+    sa:{snmv:8.6,snsi:3.1,nnmv:36.6,nnsi:34.1,ref:'vs 28/03/2026'},
+    ce:{site:{nmv:11.466,nsi:88500},ns:{nmv:401.34,nsi:1614},yoy:{snmv:8.4,snsi:-15.7,nnmv:83.8,nnsi:106.1,partial:false},mom:{snmv:-42.8,snsi:-45.5,nnmv:-27.9,nnsi:-5.2,ref:'vs 3/3/2026'},da:{snmv:28.0,snsi:16.0,nnmv:69.3,nnsi:135.6,ref:'vs 03/04/2026'},sa:{snmv:18.7,snsi:12.9,nnmv:38.9,nnsi:42.5,ref:'vs 28/03/2026'}},
+    cats:[
+      {c:'Televisions & Streaming',nmv:126.63,nsi:219,sh:27.22},
+      {c:'Large Appliances',nmv:103.49,nsi:203,sh:22.24},
+      {c:'Heating, Cooling & Air Quality',nmv:88.99,nsi:231,sh:19.13},
+      {c:'Small Appliances',nmv:61.88,nsi:819,sh:13.30},
+      {c:'Home Outdoors',nmv:14.18,nsi:133,sh:3.05},
+      {c:'Audio & General Electronics',nmv:12.52,nsi:101,sh:2.69},
+      {c:'Mattresses & Sommier',nmv:10.45,nsi:47,sh:2.25},
+      {c:'Computers & Notebooks',nmv:6.77,nsi:18,sh:1.45},
+      {c:'Cycling and Others',nmv:5.91,nsi:23,sh:1.27},
+      {c:'Furniture',nmv:5.51,nsi:54,sh:1.19}
+    ],
+    items:[
+      {id:'MLA2779034700',t:'Aire Acondicionado Split Whirlpool Inverter Frío/calor 3010 Frigorías Blanco',nmv:28.19,nsi:41,sh:6.06},
+      {id:'MLA1552140611',t:'Freidora De Aire Hisense H06afbk1s1 6.3L Negro',nmv:21.74,nsi:272,sh:4.67},
+      {id:'MLA2311876432',t:'Smart TV HQS Hqs50x6500 50 Pulgadas 4K LED',nmv:20.97,nsi:46,sh:4.51},
+      {id:'MLA2312123460',t:'Smart TV HQS Hqs50x6500 50 Pulgadas 4K LED',nmv:10.30,nsi:20,sh:2.21},
+      {id:'MLA1514481085',t:'Aire Acondicionado Split Frio Calor Siam 5000 Blanco',nmv:10.15,nsi:13,sh:2.18},
+      {id:'MLA2549113922',t:'Smart TV LG QNED 75" Ultra HD 4K AI ThinQ 75QNED82ASG',nmv:9.24,nsi:4,sh:1.99},
+      {id:'MLA2040653482',t:'Heladera Hisense Single Door 177L Dispenser De Agua Negro',nmv:9.03,nsi:21,sh:1.94},
+      {id:'MLA2900324688',t:'Smart TV Sansei Tds2532hiah LED HD 32 Android TV',nmv:8.96,nsi:35,sh:1.93},
+      {id:'MLA2169181768',t:'Lavarropas Inverter Philco Carga Frontal 11 Kg 1400 Rpm Gris Oscuro',nmv:8.80,nsi:10,sh:1.89},
+      {id:'MLA2322186476',t:'Aire Acondicionado Sansei Split Frio/calor 2365 Frigorías Sas25ha4cn',nmv:8.04,nsi:15,sh:1.73}
+    ]
+  },
+  {
+    fd:'5/5',label:'5 Mayo 2026',fecha:'2026-05-05',nrt:false,
+    site:{nmv:34.299,nsi:728100},
+    ns:{nmv:264.28,nsi:1131,part:0.771},
+    yoy:{snmv:-5.6,snsi:-17.6,nnmv:266.4,nnsi:259.0,partial:true},
+    mom:{snmv:-5.9,snsi:-2.4,nnmv:-43.2,nnsi:-52.5,ref:'vs 4/4/2026',partial:true},
+    da:{snmv:-34.6,snsi:-34.2,nnmv:-15.2,nnsi:-9.5,ref:'vs 04/05/2026',partial:true},
+    sa:{snmv:-26.7,snsi:-25.5,nnmv:-37.1,nnsi:-34.9,ref:'vs 28/04/2026',partial:true},
+    ce:{site:{nmv:17.657,nsi:158900},ns:{nmv:481.95,nsi:1420},yoy:{snmv:72.2,snsi:34.0,nnmv:653.0,nnsi:512.1,partial:false},mom:{snmv:54.0,snsi:79.5,nnmv:20.1,nnsi:-12.0,ref:'vs 4/4/2026',partial:false},da:{snmv:21.0,snsi:18.9,nnmv:73.1,nnsi:86.1,ref:'vs 04/05/2026',partial:false},sa:{snmv:25.3,snsi:31.0,nnmv:30.0,nnsi:34.5,ref:'vs 28/04/2026',partial:false}},
+    cats:[
+      {c:'Televisions & Streaming',nmv:118.04,nsi:266,sh:44.67},
+      {c:'Large Appliances',nmv:57.60,nsi:127,sh:21.80},
+      {c:'Heating, Cooling & Air Quality',nmv:35.40,nsi:91,sh:13.40},
+      {c:'Small Appliances',nmv:13.55,nsi:152,sh:5.13},
+      {c:'Construction',nmv:6.64,nsi:11,sh:2.51},
+      {c:'Audio & General Electronics',nmv:5.95,nsi:38,sh:2.25},
+      {c:'Tools',nmv:5.73,nsi:132,sh:2.17},
+      {c:'Furniture',nmv:3.65,nsi:38,sh:1.38},
+      {c:'Mattresses & Sommier',nmv:2.93,nsi:12,sh:1.11},
+      {c:'Computers & Notebooks',nmv:2.58,nsi:6,sh:0.98}
+    ],
+    items:[
+      {id:'MLA3168592134',t:'Smart TV 50" Noblex Roku TV FHD Db50x3110',nmv:33.49,nsi:71,sh:12.67},
+      {id:'MLA1508397867',t:'Lavarropas Automático Carga Superior Philco Phcs10b 7kg Blanco',nmv:17.80,nsi:36,sh:6.74},
+      {id:'MLA2478508792',t:'Smart TV Toshiba 50" VIDAA 4K LED',nmv:14.58,nsi:33,sh:5.52},
+      {id:'MLA1547513829',t:'Smart TV 55" Toshiba 55c450ns Google TV 4K LED',nmv:12.65,nsi:22,sh:4.79},
+      {id:'MLA1515665331',t:'Smart TV Pld40hs24 40 Pulgadas LED HD VIDAA Philco',nmv:11.66,nsi:35,sh:4.41},
+      {id:'MLA2900324688',t:'Smart TV Sansei Tds2532hiah LED HD 32 Android TV',nmv:11.50,nsi:48,sh:4.35},
+      {id:'MLA3153070596',t:'Smart TV 4K Philco Pld50us25ve 50"',nmv:11.19,nsi:23,sh:4.23},
+      {id:'MLA2322186476',t:'Aire Acondicionado Sansei Split Frio/calor 2365 Frigorías Blanco Sas25ha4cn',nmv:7.46,nsi:15,sh:2.82},
+      {id:'MLA1669053511',t:'Inodoro Inteligente Sansei Mizu Bidet Incorporado Temperatura + Batería Blanco',nmv:6.64,nsi:11,sh:2.51},
+      {id:'MLA2638128382',t:'Aspiradora Robot Sansei Rvcs23pi 5 Modos De Limpieza Antichoque Blanco',nmv:6.57,nsi:63,sh:2.49}
+    ],
+    bpc:{
+      hora:22,
+      brands:[
+        {b:'Philco', total:81, exp:44, near:13, cheap:24, pct_exp:54.3, pct_cheap:29.6, avg_gap:7.1,  avg_gap_exp:25.3, vs:'Frávega, Megatone, Coto, Carrefour'},
+        {b:'Atma',   total:36, exp:19, near:8,  cheap:9,  pct_exp:52.8, pct_cheap:25.0, avg_gap:8.7,  avg_gap_exp:24.0, vs:'Frávega, Megatone, Oncity'},
+        {b:'Proline',total:25, exp:17, near:1,  cheap:7,  pct_exp:68.0, pct_cheap:28.0, avg_gap:14.8, avg_gap_exp:28.2, vs:'Frávega, Megatone'},
+        {b:'Sansei', total:23, exp:10, near:5,  cheap:8,  pct_exp:43.5, pct_cheap:34.8, avg_gap:-0.5, avg_gap_exp:16.8, vs:'Frávega, Coto'},
+        {b:'Siam',   total:21, exp:17, near:1,  cheap:3,  pct_exp:81.0, pct_cheap:14.3, avg_gap:11.9, avg_gap_exp:18.9, vs:'Frávega, Megatone'},
+        {b:'Noblex', total:9,  exp:7,  near:0,  cheap:2,  pct_exp:77.8, pct_cheap:22.2, avg_gap:15.6, avg_gap_exp:22.4, vs:'Frávega, Megatone, Coto, Oncity'}
+      ],
+      top_exp:[
+        {b:'Philco', t:'Pileta Estructural Rectangular Philco 2612 L 258x179x66cm',       v:'HOME OUTDOORS',                      gap:78.5, meli:178499,  rival:99999,    rv:'Frávega'},
+        {b:'Philco', t:'Pistola De Calor Philco Pa2001dh 2000w',                          v:'TOOLS',                              gap:72.4, meli:62919,   rival:36499,    rv:'Frávega'},
+        {b:'Philco', t:'Sierra Caladora Eléctrica Philco 350w Sk353p',                    v:'TOOLS',                              gap:71.2, meli:70179,   rival:40999,    rv:'Frávega'},
+        {b:'Proline',t:'Manta De Estimulación Para Gatos Proline',                        v:'PET',                                gap:70.5, meli:37509,   rival:21999,    rv:'Frávega'},
+        {b:'Philco', t:'Soporte TV Philco Inclinable 23" a 42" VESA Reforzado',           v:'TELEVISIONS & STREAMING DEVICES',    gap:64.3, meli:32999,   rival:20090,    rv:'Frávega'},
+        {b:'Atma',   t:'(sin título)',                                                    v:'BEAUTY ELECTRONICS',                 gap:63.1, meli:66549,   rival:40799,    rv:'Frávega'},
+        {b:'Philco', t:'Bordeadora Inalámbrica Philco 12V 8000RPM',                       v:'TOOLS',                              gap:59.7, meli:119789,  rival:74999,    rv:'Frávega'},
+        {b:'Philco', t:'Heladera Philco One Door Cíclica Con Dispenser 161L Plata',       v:'LARGE APPLIANCES',                   gap:59.5, meli:637999,  rival:399999,   rv:'Frávega'},
+        {b:'Noblex', t:'Noblex Acn4k1 Cámara Deportiva 4k Negro',                         v:'CAMERAS & DRONES',                   gap:58.7, meli:168189,  rival:105999,   rv:'Megatone'},
+        {b:'Atma',   t:'Combo Secador + Planchita Atma Home Salon Set Ck4010p',           v:'BEAUTY ELECTRONICS',                 gap:57.4, meli:100429,  rival:63799,    rv:'Frávega'},
+        {b:'Philco', t:'Auriculares Vincha Philco Ap1706 Bluetooth Hi-fi',                v:'WEARABLES',                          gap:57.3, meli:62919,   rival:39999,    rv:'Frávega'},
+        {b:'Philco', t:'Tablet Philco Tp7a464 7\'\' 64gb 4gb Android Negro',             v:'SMARTPHONES & TABLETS',              gap:57.3, meli:157299,  rival:99999,    rv:'Megatone'},
+        {b:'Atma',   t:'Freidora De Aire Y Grill Digital Atma Fr901dp 6.3 Litros',        v:'SMALL APPLIANCES',                   gap:56.2, meli:234299,  rival:149999,   rv:'Frávega'},
+        {b:'Proline',t:'Yoga Mat Proline Premium Confort Con Correa 183x61cm',            v:'INDOOR SPORTS',                      gap:51.3, meli:30249,   rival:19999,    rv:'Frávega'},
+        {b:'Sansei', t:'Anafe Sansei Electrico 1 Hornalla 500 W',                         v:'MOUNTAIN & OUTDOORS',                gap:49.8, meli:31459,   rival:20999,    rv:'Frávega'},
+        {b:'Philco', t:'Filtro Para Bebedero Mascotas Philco Wf006pp Blanco',             v:'PET',                                gap:47.0, meli:14699,   rival:9999,     rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Siam Bajo Mesada Cíclica 83L Plata HSI-BM093P2',        v:'LARGE APPLIANCES',                   gap:46.3, meli:659999,  rival:450999,   rv:'Frávega'},
+        {b:'Philco', t:'Termotanque Eléctrico Philco 94PHTE100B2 Blanco 93L',            v:'HEATING, COOLING & AIR QUALITY',     gap:45.4, meli:417999,  rival:287524,   rv:'Frávega'},
+        {b:'Atma',   t:'Escritorio Tipo Industrial Atma De Hierro Y Madera Mdp Blanco',  v:'FURNITURE',                          gap:44.4, meli:115499,  rival:79999,    rv:'Megatone'},
+        {b:'Proline',t:'Maquina De Boxeo Proline Bluetooth + Par De Guantes',            v:'INDOOR SPORTS',                      gap:43.2, meli:85909,   rival:59999,    rv:'Frávega'},
+        {b:'Proline',t:'Abrigo Con Aislante Térmico Proline Para Perros Talle S Gris',   v:'PET',                                gap:43.2, meli:15749,   rival:10999,    rv:'Frávega'},
+        {b:'Philco', t:'Heladera Philco Top Mount Cíclica 199L Blanca PHCT225B',         v:'LARGE APPLIANCES',                   gap:43.0, meli:815099,  rival:569999,   rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Siam Bajo Mesada Cíclica Retro 83L Crema HSI-BM090CR2', v:'LARGE APPLIANCES',                  gap:40.8, meli:637999,  rival:452999,   rv:'Frávega'},
+        {b:'Proline',t:'Rollers Extensibles Proline MU3-12ROLL Talle 39-43 Negro',       v:'OTHER SPORTS',                       gap:40.5, meli:108149,  rival:76999,    rv:'Frávega'},
+        {b:'Noblex', t:'Proyector Noblex Nx30120xnr HD Control Remoto',                  v:'IT PERIPHERALS',                     gap:39.3, meli:236887,  rival:169999,   rv:'Frávega'},
+        {b:'Proline',t:'Barras Push Up Paralelas De Calistenia Proline Con Agarre Eva',  v:'INDOOR SPORTS',                      gap:38.3, meli:38719,   rival:27999,    rv:'Frávega'},
+        {b:'Atma',   t:'Cafetera Digital Atma Acero Inoxidable 1.5 Litros',              v:'SMALL APPLIANCES',                   gap:37.6, meli:110109,  rival:79999,    rv:'Megatone'},
+        {b:'Philco', t:'Heladera No Frost Philco Phsb555xt 555L Display Clase A+ Plateada',v:'LARGE APPLIANCES',                 gap:37.5, meli:1924999, rival:1399999,  rv:'Frávega'},
+        {b:'Sansei', t:'Aspiradora De Tacho Sansei 10 Litros 1000 W Apto Líquidos',      v:'SMALL APPLIANCES',                   gap:37.5, meli:93499,   rival:67999,    rv:'Frávega'},
+        {b:'Philco', t:'Heladera Philco Top Mount Cíclica 242L Acero Inox PHCT242B',     v:'LARGE APPLIANCES',                   gap:35.1, meli:769999,  rival:569999,   rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Exhibidora Vertical Siam 65L Puerta Doble Vidrio',      v:'INDUSTRY',                           gap:29.9, meli:696299,  rival:535999,   rv:'Frávega'},
+        {b:'Atma',   t:'Batidora Planetaria Atma 4.8L 1000W 6 Velocidades Rojo',         v:'SMALL APPLIANCES',                   gap:29.8, meli:208999,  rival:160999,   rv:'Frávega'},
+        {b:'Proline',t:'Cama Perros Elevada Reforzada Proline Mascotas XL Gris',         v:'PET',                                gap:29.1, meli:61949,   rival:47999,    rv:'Frávega'},
+        {b:'Proline',t:'Tendedero Eléctrico Proline Plegable Con Alas 220W',             v:'HOUSEHOLD ITEMS',                    gap:29.0, meli:90299,   rival:69999,    rv:'Megatone'},
+        {b:'Philco', t:'Termotanque Electrico 1500w Philco Phte080b2 73lts',             v:'HEATING, COOLING & AIR QUALITY',     gap:27.9, meli:384999,  rival:300999,   rv:'Coto'},
+        {b:'Proline',t:'Cocina Multigas Proline Cpro-cm056b4 4 Hornallas Blanco',        v:'LARGE APPLIANCES',                   gap:26.6, meli:925099,  rival:730999,   rv:'Frávega'},
+        {b:'Atma',   t:'Combo Secador + Planchita Atma Home Salon Set Ck4010p',          v:'BEAUTY ELECTRONICS',                 gap:25.9, meli:100429,  rival:79799,    rv:'Frávega'},
+        {b:'Philco', t:'Ventilador De Pie Philco 18\'\' Control Touch 3 Aspas Negro',    v:'HEATING, COOLING & AIR QUALITY',     gap:25.1, meli:118799,  rival:94999,    rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Siam Top Mount Cíclica 199L Blanca HSI-CT225B',         v:'LARGE APPLIANCES',                   gap:22.8, meli:815099,  rival:663999,   rv:'Frávega'},
+        {b:'Philco', t:'Tablet Philco Disney 7 4gb 64gb',                                v:'SMARTPHONES & TABLETS',              gap:22.2, meli:186999,  rival:152999,   rv:'Frávega'},
+        {b:'Siam',   t:'Lavavajillas Siam 15 Cubiertos Acero Inoxidable Lsi-lj15x',     v:'LARGE APPLIANCES',                   gap:21.7, meli:912999,  rival:749999,   rv:'Frávega'},
+        {b:'Atma',   t:'Mandolina Cortador Rallador Picador De Verduras Atma',           v:'HOUSEHOLD ITEMS',                    gap:21.0, meli:60499,   rival:49999,    rv:'Frávega'},
+        {b:'Philco', t:'Heladera Philco Top Mount Cíclica 242L Acero Inox PHCT242X',     v:'LARGE APPLIANCES',                   gap:21.0, meli:846999,  rival:699999,   rv:'Frávega'},
+        {b:'Atma',   t:'Planchita Atma Pl8933p Alisado Con Placas De Ceramica Blanco',   v:'BEAUTY ELECTRONICS',                 gap:21.0, meli:39929,   rival:32999,    rv:'Carrefour'},
+        {b:'Proline',t:'Túnel Plegable Para Gatos Proline',                              v:'PET',                                gap:20.0, meli:16799,   rival:13999,    rv:'Frávega'},
+        {b:'Philco', t:'Bicicleta Fija Spinning Disco 18kg Philco',                      v:'INDOOR SPORTS',                      gap:19.7, meli:556499,  rival:464999,   rv:'Megatone'},
+        {b:'Philco', t:'Heladera Philco Side By Side No Frost 492L Blanca',              v:'LARGE APPLIANCES',                   gap:19.0, meli:1869999, rival:1571999,  rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Top Mount Cíclica Siam HSI-CT242 231L Blanca',          v:'LARGE APPLIANCES',                   gap:18.6, meli:769999,  rival:648999,   rv:'Frávega'},
+        {b:'Proline',t:'Mopa Proline MPLVS02 Gris Oscuro',                               v:'HOUSEHOLD ITEMS',                    gap:18.2, meli:12999,   rival:10999,    rv:'Frávega'},
+        {b:'Noblex', t:'Auricular Noblex Bluetooth Hp350bt Luzu TV Color Negro',         v:'WEARABLES',                          gap:18.1, meli:49609,   rival:41998,    rv:'Oncity'},
+        {b:'Proline',t:'Aro De Basquet N7 Reforzado Con Tornillos De Pared Proline',     v:'OTHER MAINSTREAM SPORTS',            gap:18.0, meli:47189,   rival:39990,    rv:'Frávega'},
+        {b:'Siam',   t:'Lavarropas Siam Carga Superior Semi Automático 5 Kg',            v:'LARGE APPLIANCES',                   gap:17.8, meli:248599,  rival:210999,   rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Siam Bajo Mesada Retro 43L Roja HSI-BM50RR2',          v:'LARGE APPLIANCES',                   gap:16.7, meli:402599,  rival:344999,   rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Siam Bajo Mesada Retro 50L Crema Hsi-bm50cr2',         v:'LARGE APPLIANCES',                   gap:16.5, meli:392699,  rival:336999,   rv:'Frávega'},
+        {b:'Philco', t:'Freezer De Pozo Philco Phch199b 192 Litros Blanco Eficiencia A', v:'LARGE APPLIANCES',                   gap:16.5, meli:688599,  rival:590999,   rv:'Frávega'},
+        {b:'Atma',   t:'Batidora Planetaria Atma 4.8L 1000W 6 Velocidades Crema',       v:'SMALL APPLIANCES',                   gap:16.1, meli:186999,  rival:160999,   rv:'Frávega'},
+        {b:'Atma',   t:'Mueble Recibidor Tipo Industrial Atma Home Li020-frprf',         v:'FURNITURE',                          gap:15.5, meli:69299,   rival:59999,    rv:'Frávega'},
+        {b:'Siam',   t:'Heladera Siam Bajo Mesada Retro 50L Verde Hsi-bm50xr2',         v:'LARGE APPLIANCES',                   gap:15.4, meli:402599,  rival:348999,   rv:'Frávega'},
+        {b:'Philco', t:'Freezer De Pozo Philco Phch297b 280 Lts Blanco',                v:'LARGE APPLIANCES',                   gap:15.0, meli:782099,  rival:679999,   rv:'Frávega'}
+      ]
+    }
+  },
+  {
+    fd:'6/6',
+    label:'6 Junio 2026',
+    fecha:'2026-06-06',
+    nrt:false,
+    site:{nmv:42.202,nsi:820000},
+    ns:{nmv:366.4,nsi:1677,part:0.868},
+    yoy:{snmv:18.6,snsi:1.4,nnmv:35.3,nnsi:29.8,partial:false,ref:'2025-06-06'},
+    mom:{snmv:-28.8,snsi:-31.5,nnmv:-35.4,nnsi:-22.4,ref:'vs 5/5/2026',partial:false},
+    da:{snmv:-9.3,snsi:-14.2,nnmv:-15.8,nnsi:-8.0,ref:'vs 05/06/2026',partial:false},
+    sa:{snmv:26.5,snsi:15.7,nnmv:11.2,nnsi:20.2,ref:'vs 30/05/2026',partial:false},
+    cats:[{c:'TELEVISIONS & STREAMING DEVICES',nmv:200.77,nsi:322,sh:54.79},{c:'LARGE APPLIANCES',nmv:54.05,nsi:128,sh:14.75},{c:'SMARTPHONES & TABLETS',nmv:22.71,nsi:48,sh:6.2},{c:'HEATING, COOLING & AIR QUALITY',nmv:20.23,nsi:77,sh:5.52},{c:'SMALL APPLIANCES',nmv:12.51,nsi:188,sh:3.41},{c:'HOUSEHOLD ITEMS',nmv:9.38,nsi:219,sh:2.56},{c:'AUDIO & GENERAL ELECTRONICS',nmv:8.95,nsi:45,sh:2.44},{c:'FURNITURE',nmv:5.94,nsi:76,sh:1.62},{c:'BEAUTY ELECTRONICS',nmv:5.64,nsi:115,sh:1.54},{c:'CONSTRUCTION',nmv:4.17,nsi:9,sh:1.14}],
+    items:[{id:'MLA2478508792',t:'Smart Tv Toshiba 50´´ Vidaa 4k Led',nmv:25.81,nsi:53,sh:7.04},{id:'MLA3152894794',t:'Smart Tv 4k Philco Pld50us25ve 50\'\'',nmv:21.45,nsi:44,sh:5.85},{id:'MLA2312950360',t:'Smart Tv 50´´ Sansei Google Tv 4k',nmv:18.36,nsi:36,sh:5.01},{id:'MLA1518754201',t:'Smart Tv Hqs 55 Pulgadas 4k Con Vidaa Y Hdr',nmv:14.52,nsi:23,sh:3.96},{id:'MLA2243133102',t:'Smart Tv Sansei 55 Pulgadas Led 4k Google Tv',nmv:11.35,nsi:18,sh:3.1},{id:'MLA2548969662',t:'Televisor LG Oled Ai 65 Pulgadas Smart 4k - Oled65b5psa',nmv:10.49,nsi:4,sh:2.86},{id:'MLA3168555620',t:'Smart Tv 58 Noblex Android Tv Db58x7580',nmv:10.04,nsi:12,sh:2.74},{id:'MLA2312924752',t:'Smart Tv 50´´ Sansei Google Tv 4k',nmv:8.8,nsi:15,sh:2.4},{id:'MLA1789703815',t:'Tender Eléctrico Plegable Proline 130w 8 Varillas Aluminio Portatil Hogar Secado Rapido Interior Resistente Seguro Blanco',nmv:7.51,nsi:96,sh:2.05},{id:'MLA1518645363',t:'Smart Tv Hqs 55 Pulgadas 4k Con Vidaa Y Hdr',nmv:6.8,nsi:12,sh:1.86}],
+    ce:{site:{nmv:13.643,nsi:95300},ns:{nmv:323.79,nsi:842},yoy:{snmv:28.2,snsi:-12.6,nnmv:27.2,nnsi:-24.8,partial:false},mom:{snmv:-26.2,snsi:-37.0,nnmv:-37.1,nnsi:-38.1,ref:'vs 5/5/2026'},da:{snmv:-6.2,snsi:-18.1,nnmv:-18.3,nnsi:-15.8,ref:'vs 05/06/2026'},sa:{snmv:43.2,snsi:25.1,nnmv:10.5,nnsi:4.1,ref:'vs 30/05/2026'}}
+  },
+  {
+    fd:'7/7',
+    label:'7 Julio 2026',
+    fecha:'2026-07-07',
+    nrt:true,
+    site:{nmv:11.896,nsi:259700},
+    ns:{nmv:93.49,nsi:293,part:0.786},
+    yoy:{snmv:-73.7,snsi:-75.5,nnmv:-80.3,nnsi:-85.4,partial:true,ref:'2025-07-07'},
+    mom:{snmv:-72.6,snsi:-69.1,nnmv:-76.1,nnsi:-83.1,ref:'vs 6/6/2026',partial:true},
+    da:{snmv:-79.9,snsi:-78.5,nnmv:-78.9,nnsi:-81.8,ref:'vs 06/07/2026',partial:true},
+    sa:{snmv:-77.7,snsi:-76.3,nnmv:-77.4,nnsi:-81.1,ref:'vs 30/06/2026',partial:true},
+    cats:[{c:'TELEVISIONS & STREAMING DEVICES',nmv:50.23,nsi:77,sh:53.73},{c:'LARGE APPLIANCES',nmv:15.44,nsi:28,sh:16.52},{c:'HEATING, COOLING & AIR QUALITY',nmv:6.89,nsi:9,sh:7.36},{c:'SMARTPHONES & TABLETS',nmv:5.39,nsi:12,sh:5.76},{c:'COMPUTERS & NOTEBOOKS',nmv:5.36,nsi:7,sh:5.74},{c:'SMALL APPLIANCES',nmv:3.81,nsi:27,sh:4.07},{c:'AUDIO & GENERAL ELECTRONICS',nmv:1.18,nsi:8,sh:1.26},{c:'HOME OUTDOORS',nmv:1.11,nsi:8,sh:1.18},{c:'FURNITURE',nmv:0.78,nsi:9,sh:0.84},{c:'HOUSEHOLD ITEMS',nmv:0.57,nsi:17,sh:0.61}],
+    items:[{id:'MLA3168592134',t:'Smart Tv 50 Noblex Roku Tv Fhd Db50x3110',nmv:20.35,nsi:42,sh:21.77},{id:'MLA3481769026',t:'Smart Tv Noblex 86 Qled 4k Dl86x9500',nmv:5.32,nsi:2,sh:5.69},{id:'MLA3481754558',t:'Smart Tv 98  Noblex Black Series Qled 4k Google Tv',nmv:4.66,nsi:1,sh:4.98},{id:'MLA3132593276',t:'Lavasecarropas Philco 11/6 Kg Carga Frontal Inverter Gris',nmv:3.94,nsi:5,sh:4.22},{id:'MLA1514437339',t:'Smart Tv Noblex 75 4k Led Google Tv Dv75x8580 Wifi Bluetooth Hdr Hdmi',nmv:3.88,nsi:3,sh:4.15},{id:'MLA2245639100',t:'Smart Tv Noblex Dv43x7180 43 Google Tv',nmv:3.53,nsi:8,sh:3.77},{id:'MLA1985411688',t:'Notebook Asus Zenbook S 13  Ultrafino Ux5304 Oled 3k Intel Core Ultra 7 32gb Ram 1tb Ssd Windows 11 Gris',nmv:3.33,nsi:1,sh:3.57},{id:'MLA3471992550',t:'Lavarropas 12kg Aiddtm Inverter Direct Drivetm Steam Gris Oscuro',nmv:3.25,nsi:3,sh:3.48},{id:'MLA3100700594',t:'Aire Acondicionado Split Frio Calor Noblex 5418 Frigorias / 6300 Watts Blanco',nmv:3.17,nsi:3,sh:3.39},{id:'MLA3389365660',t:'Moto Razr 60 Lightlest Sky',nmv:2.86,nsi:3,sh:3.06}],
+    ce:{site:{nmv:3.512,nsi:32800},ns:{nmv:88.78,nsi:178},yoy:{snmv:-73.2,snsi:-76.8,nnmv:-79.9,nnsi:-89.5,partial:true},mom:{snmv:-75.3,snsi:-66.8,nnmv:-74.6,nnsi:-80.2,ref:'vs 6/6/2026'},da:{snmv:-80.2,snsi:-79.1,nnmv:-78.5,nnsi:-83.8,ref:'vs 06/07/2026'},sa:{snmv:-77.3,snsi:-76.1,nnmv:-76.3,nnsi:-80.7,ref:'vs 30/06/2026'}},
+    bpc:{hora:10,brands:[{b:'Philco',total:73,exp:22,near:26,cheap:25,pct_exp:30.1,pct_cheap:34.2,avg_gap:0.5,avg_gap_exp:'27.5',vs:'Carrefour Argentina,Coto,Easy Argentina,Frávega'},{b:'Sansei',total:25,exp:5,near:13,cheap:7,pct_exp:20.0,pct_cheap:28.0,avg_gap:4.9,avg_gap_exp:'38.3',vs:'Carrefour Argentina,Coto,Frávega,Megatone'},{b:'Proline',total:25,exp:10,near:8,cheap:7,pct_exp:40.0,pct_cheap:28.0,avg_gap:2.4,avg_gap_exp:'23.8',vs:'Frávega,Megatone'},{b:'Atma',total:19,exp:7,near:8,cheap:4,pct_exp:36.8,pct_cheap:21.1,avg_gap:2,avg_gap_exp:'17.3',vs:'Coto,Easy Argentina,Frávega,Megatone'},{b:'Siam',total:17,exp:3,near:9,cheap:5,pct_exp:17.6,pct_cheap:29.4,avg_gap:1.5,avg_gap_exp:'30.1',vs:'Frávega,Megatone'},{b:'Noblex',total:10,exp:5,near:3,cheap:2,pct_exp:50.0,pct_cheap:20.0,avg_gap:5.3,avg_gap_exp:'22.3',vs:'Coto,Frávega,Megatone'}],top_exp:[{b:'Philco',t:'Taladro Inalámbrico Philco Pti12ase1p Verde',v:'TOOLS',gap:98.8,meli:83489,rival:41999,rv:'Frávega'},{b:'Proline',t:'Zapatero Organizador De Calzado Proline Zapatos Zapatillas Botinero 9 Niveles',v:'FURNITURE',gap:73.4,meli:78649,rival:45349,rv:'Frávega'},{b:'Sansei',t:'Tablet Sansei Ts7a232 7 Pulgadas 32gb 2gb Android Quad Core',v:'SMARTPHONES & TABLETS',gap:71.9,meli:115999,rival:67499,rv:'Coto'},{b:'Philco',t:'Vaso Térmico Con Sorbete Philco Vt500php 500ml De Acero Inoxidable Tapa Y Sistema Antigoteo',v:'MOUNTAIN & OUTDOORS',gap:68.4,meli:38719,rival:22998,rv:'Frávega'},{b:'Atma',t:'Cocina Multigas Atma CCM056 Negra 56cm 4 Hornallas',v:'LARGE APPLIANCES',gap:66.9,meli:1126509,rival:674999,rv:'Coto'},{b:'Philco',t:'Minitorno Eléctrico Philco 210 Piezas C/maletín 135 W',v:'TOOLS',gap:63.1,meli:112529,rival:68999,rv:'Frávega'},{b:'Philco',t:'Cocina Eléctrica Philco Phch060b 4 Hornallas 60 Cm Blanco',v:'LARGE APPLIANCES',gap:60,meli:991999,rival:619999,rv:'Oncity'},{b:'Sansei',t:'Anafe Sansei Electrico 1 Hornalla 500 W',v:'MOUNTAIN & OUTDOORS',gap:57.3,meli:31459,rival:19998,rv:'Frávega'},{b:'Siam',t:'Heladera Siam Bajo Mesada Retro 50l Coral Hsi-bm50br2 Cycle Defrost',v:'LARGE APPLIANCES',gap:50.8,meli:391999,rival:259999,rv:'Megatone'},{b:'Noblex',t:'Proyector Noblex Nx30120xnr Hd Control Remoto',v:'IT PERIPHERALS, PARTS & ACCESSORIES',gap:43.6,meli:236887,rival:164999,rv:'Frávega'},{b:'Proline',t:'Arnés Petral Correa anti tirones Pechera Regulable Para Perros Bordo Proline Talle L',v:'PET',gap:42.9,meli:19999,rival:13999,rv:'Frávega'},{b:'Noblex',t:'Torre de Sonido Noblex MNT290 Bluetooth Efectos de Voz y Luces LED Negro',v:'AUDIO & GENERAL ELECTRONICS',gap:42.6,meli:255199,rival:178999,rv:'Frávega'},{b:'Philco',t:'Cocina Eléctrica Philco Phch060p 4 Hornallas 60 Cm Plateado',v:'LARGE APPLIANCES',gap:38.5,meli:775999,rival:560249,rv:'Coto'},{b:'Philco',t:'Pileta Estructural Rectangular Philco 300cm X 207cm X 66cm 3700 L',v:'HOME OUTDOORS',gap:33.7,meli:269999,rival:201999,rv:'Megatone'},{b:'Siam',t:'Termotanque Eléctrico Siam 65 Lts 1800 W Conexión De Agua Inferior Temperatura Ajustable',v:'HEATING, COOLING & AIR QUALITY',gap:33.3,meli:399999,rival:299999,rv:'Megatone'},{b:'Philco',t:'Pileta Estructural Rectangular Philco 258cm X 179cm X 66cm 2612 L',v:'HOME OUTDOORS',gap:33.3,meli:199999,rival:149999,rv:'Frávega'},{b:'Proline',t:'Cama Perros Elevada Reforzada Proline Mascotas Xl Gris Liso',v:'PET',gap:31.9,meli:61999,rival:46999,rv:'Frávega'},{b:'Philco',t:'Pileta De Lona Estructural Redonda Philco 360 Cm X 76 Cm 6125 L',v:'HOME OUTDOORS',gap:31,meli:299999,rival:228999,rv:'Frávega'},{b:'Sansei',t:'Freidora De Aire Sansei 1700 W 6l Negra',v:'SMALL APPLIANCES',gap:26.2,meli:90999,rival:72099,rv:'Frávega'},{b:'Sansei',t:'Freidora De Aire Sansei 1700 W 6l Blanca',v:'SMALL APPLIANCES',gap:26.2,meli:90999,rival:72099,rv:'Frávega'},{b:'Philco',t:'Tablet Philco Disney 7 4gb 64gb',v:'SMARTPHONES & TABLETS',gap:26.2,meli:158999,rival:125999,rv:'Frávega'},{b:'Philco',t:'Pileta Estructural Redonda Plus Philco Patrón Ratán 6765 L',v:'HOME OUTDOORS',gap:25.8,meli:399999,rival:317999,rv:'Megatone'},{b:'Proline',t:'Arnés Petral Correa anti tirones Pechera Regulable Para Perros Bordo Proline Talle M',v:'PET',gap:21.4,meli:16999,rival:13999,rv:'Frávega'},{b:'Philco',t:'Freidora De Aire Philco Fr256ph 1700w 6 L 12 Programas De Cocción Negro',v:'SMALL APPLIANCES',gap:17.7,meli:112999,rival:95999,rv:'Frávega'},{b:'Philco',t:'Ventilador Turbo Philco Vtp2021n 20 50w 3 Vel',v:'HEATING, COOLING & AIR QUALITY',gap:16,meli:115999,rival:99999,rv:'Frávega'},{b:'Proline',t:'Manta De Estimulación Para Gatos Proline',v:'PET',gap:14.3,meli:23999,rival:20999,rv:'Frávega'},{b:'Proline',t:'Túnel Plegable Para Gatos Proline',v:'PET',gap:14.3,meli:15999,rival:13999,rv:'Frávega'},{b:'Philco',t:'Freezer Vertical Philco Phcv065b 65lts Color Blanco',v:'LARGE APPLIANCES',gap:14.3,meli:399999,rival:349999,rv:'Frávega'},{b:'Philco',t:'Ventilador De Pie Philco 18´´ Con Control Y Touch 3 Aspas Negro',v:'HEATING, COOLING & AIR QUALITY',gap:13.7,meli:107999,rival:94999,rv:'Frávega'},{b:'Philco',t:'Afeitadora Eléctrica Philco Titanium + Con Base Cargadora',v:'BEAUTY ELECTRONICS',gap:13.3,meli:67999,rival:59999,rv:'Frávega'},{b:'Proline',t:'(sin título)',v:'PET',gap:12.5,meli:26999,rival:23998,rv:'Frávega'},{b:'Noblex',t:'Auriculares Inalámbricos Noblex Hp350bt Bluetooth 5.0 Color Negro',v:'WEARABLES',gap:12.5,meli:44999,rival:39999,rv:'Coto'},{b:'Atma',t:'Escritorio Tipo Industrial Atma De Hierro Y Madera Mdp Color Blanco',v:'FURNITURE',gap:11.8,meli:84999,rival:75999,rv:'Megatone'},{b:'Atma',t:'Secador De Pelo Style Atma Sp8925p 1300w. 2 Velocidades Color Negro',v:'BEAUTY ELECTRONICS',gap:11.2,meli:37999,rival:34170,rv:'Frávega'},{b:'Philco',t:'Auriculares Vincha Philco Ap1706g Bluetooh Micrófono Incorporado Sonido Hi-fi',v:'WEARABLES',gap:11.1,meli:39999,rival:35999,rv:'Megatone'},{b:'Proline',t:'Colchon Inflable Infantil Azul Proline 157 X 66 X 23 Cm 1 Plaza con almohada incorporada',v:'MOUNTAIN & OUTDOORS',gap:10.5,meli:20999,rival:18999,rv:'Frávega'},{b:'Atma',t:'Heladera Conservadora Atma Vintage 20L Manija y Correa Intercambiables Blanca',v:'MOUNTAIN & OUTDOORS',gap:10.3,meli:74999,rival:67999,rv:'Frávega'},{b:'Sansei',t:'Horno Grill Sansei 63Lts Con Anafes Y Convección',v:'LARGE APPLIANCES',gap:10,meli:219999,rival:199999,rv:'Frávega'},{b:'Philco',t:'Calefactor Infrarrojo Philco 1800 W Tipo Torre 3 Niveles De Temperatura Y Temporizador',v:'HEATING, COOLING & AIR QUALITY',gap:9.4,meli:139999,rival:127999,rv:'Frávega'},{b:'Proline',t:'Abrigo Con Aislante Térmico Proline Para Perros Talle S Gris Oscuro',v:'PET',gap:9.1,meli:11999,rival:10999,rv:'Frávega'},{b:'Atma',t:'Microondas Digital Atma Matdgb23uap 23 Litros Grill 900w Negro',v:'LARGE APPLIANCES',gap:8.8,meli:245999,rival:226156,rv:'Easy Argentina'},{b:'Proline',t:'Rascador Interactivopara Gatos Proline',v:'PET',gap:8,meli:53999,rival:49999,rv:'Frávega'},{b:'Noblex',t:'Smart Tv 50 Noblex Roku Tv Fhd Db50x3110',v:'TELEVISIONS & STREAMING DEVICES',gap:7.8,meli:509999,rival:472999,rv:'Megatone'},{b:'Philco',t:'Ventilador De Pie Philco Vpip2623p Industrial 26 Pulgadas Aspas 3',v:'HEATING, COOLING & AIR QUALITY',gap:6.8,meli:157999,rival:147999,rv:'Oncity'},{b:'Atma',t:'Planchita Classic Tourmaline Atma',v:'BEAUTY ELECTRONICS',gap:6.7,meli:31999,rival:29999,rv:'Frávega'},{b:'Philco',t:'Heladera Philco Top Mount No Frost 174L Blanca- PHNT198B2',v:'LARGE APPLIANCES',gap:6.3,meli:679999,rival:639999,rv:'Frávega'},{b:'Philco',t:'Heladera Philco Top Mount Cíclica 242L Acero Inoxidable - PHCT242X',v:'LARGE APPLIANCES',gap:6.3,meli:741999,rival:698249,rv:'Coto'},{b:'Siam',t:'Freezer Cíclico Vertical Siam Fsi-cv180b 166 Lts Color Blanco',v:'LARGE APPLIANCES',gap:6.2,meli:689999,rival:649999,rv:'Frávega'},{b:'Atma',t:'Abridor De Vinos Automático Atma Av24b0ap Todas Las Botellas',v:'HOUSEHOLD ITEMS',gap:5.6,meli:18999,rival:17999,rv:'Frávega'},{b:'Philco',t:'Heladera Philco One Door Cíclica con Dispenser 161L Blanca- PHSD179BD2',v:'LARGE APPLIANCES',gap:5.3,meli:494999,rival:470299,rv:'Frávega'},{b:'Noblex',t:'Monitor Noblex 25 Pulgadas Nxsm2500 Led Fhd',v:'IT PERIPHERALS, PARTS & ACCESSORIES',gap:5.3,meli:199999,rival:189999,rv:'Frávega'},{b:'Philco',t:'Heladera Philco One Door Cíclica Con Dispenser 164L INOX - PHSD170XD',v:'LARGE APPLIANCES',gap:5.2,meli:509999,rival:484599,rv:'Frávega'}]}
+  }
+];
+/*%%FECHAS_END%%*/
+
+function renderBPC(bpc){
+  const bars=bpc.brands.map(b=>{
+    const pn=100-b.pct_exp-b.pct_cheap;
+    const tagCls=b.avg_gap>5?'neg':'pos';
+    const tagTxt=(b.avg_gap>=0?'+':'')+b.avg_gap.toFixed(1)+'%';
+    return`<div class="bpc-brand-row">
+  <span class="bpc-brand-lbl">${b.b}</span>
+  <div>
+    <div class="bpc-bar-wrap">
+      <div class="bpc-bar-exp"   style="width:${b.pct_exp}%"  title="Expensive: ${b.pct_exp}%"></div>
+      <div class="bpc-bar-near"  style="width:${pn.toFixed(1)}%" title="Paridad: ${pn.toFixed(1)}%"></div>
+      <div class="bpc-bar-cheap" style="width:${b.pct_cheap}%" title="Cheaper: ${b.pct_cheap}%"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-top:2px">
+      <span>${b.pct_exp}% caro</span><span>${b.pct_cheap}% más barato</span>
+    </div>
+  </div>
+  <span class="bpc-avg-tag ${tagCls}">${tagTxt} avg</span>
+</div>`;
+  }).join('');
+
+  // Dropdown options — unique verticals sorted
+  const verticals=['Todas',...[...new Set(bpc.top_exp.map(r=>r.v))].sort()];
+  const opts=verticals.map(v=>`<option value="${v}">${v}</option>`).join('');
+
+  // Rows with data-v attribute for filtering
+  const topRows=bpc.top_exp.map((r,i)=>`<tr data-v="${r.v}">
+  <td class="rk bpc-rank">${i+1}</td>
+  <td><span style="font-size:10px;font-weight:700;color:var(--red);margin-right:4px">${r.b}</span><span class="item-ttl" style="max-width:240px">${r.t}</span><span style="display:block;font-size:9px;color:var(--muted)">${r.v}</span></td>
+  <td class="num neg" style="font-weight:700">+${r.gap.toFixed(1)}%</td>
+  <td class="num">$${Math.round(r.meli).toLocaleString('es-AR')}</td>
+  <td class="num" style="color:var(--green)">$${Math.round(r.rival).toLocaleString('es-AR')}</td>
+  <td style="font-size:11px;color:var(--muted)">${r.rv}</td>
+</tr>`).join('');
+
+  return`<div class="bpc-section">
+  <div class="sec-label">Competitividad BPC vs Mercado — 5/5 · hora ${bpc.hora} · NRT</div>
+  <div class="bpc-grid">
+    <div class="bpc-bar-card">
+      <div class="chart-ttl" style="margin-bottom:10px">Estado por marca (% ítems)</div>
+      <div class="bpc-legend">
+        <span class="bpc-leg-item"><span class="bpc-leg-dot" style="background:var(--red)"></span>Caro en MLA</span>
+        <span class="bpc-leg-item"><span class="bpc-leg-dot" style="background:#FFC107"></span>Paridad (±5%)</span>
+        <span class="bpc-leg-item"><span class="bpc-leg-dot" style="background:var(--green)"></span>Más barato en MLA</span>
+      </div>
+      ${bars}
+    </div>
+    <div class="tbl-card">
+      <div class="tbl-head">
+        <span class="tbl-head-ttl">Ítems expensive</span>
+        <select id="bpc-vfilter" onchange="filterBPC(this.value)"
+          style="font-size:11px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px 8px;background:var(--bg-alt);color:var(--ink)">
+          ${opts}
+        </select>
+      </div>
+      <table><thead><tr><th>#</th><th>Producto</th><th class="r">Gap</th><th class="r">MELI</th><th class="r">Rival</th><th>vs</th></tr></thead>
+      <tbody id="bpc-tbody">${topRows}</tbody></table>
+    </div>
+  </div>
+  <div class="footnote">Fuente: COMPETITIVE_INTELLIGENCE_ITEM_STATUS_NRT — snapshot hora ${bpc.hora} del 05/05/2026. Expensive = precio MELI &gt; rival +5%. Rivales: Frávega, Megatone, Coto, Oncity, Carrefour.</div>
+</div>`;
+}
+
+function filterBPC(v){
+  const rows=document.querySelectorAll('#bpc-tbody tr');
+  let n=1;
+  rows.forEach(r=>{
+    const show=(v==='Todas'||r.dataset.v===v);
+    r.style.display=show?'':'none';
+    if(show) r.querySelector('.bpc-rank').textContent=n++;
+  });
+}
+
+const LABELS=['1/1','2/2','3/3','4/4','5/5','6/6','7/7⚡']; /*%%LABELS%%*/
+const NMV_26=[25.396,61.89,61.493,36.292,59.132,43.488,11.896]; /*%%NMV_26%%*/
+const NMV_25=[15.348,22.083,24.153,33.458,36.343,35.598,45.213]; /*%%NMV_25%%*/
+const NSI_26=[517.1,1277.9,1271.6,743.6,1195.5,839.8,259.7]; /*%%NSI_26%%*/
+const NSI_25=[368.2,552.1,599.1,763.7,883.2,808.9,1057.9]; /*%%NSI_25%%*/
+const PART=[1.381,0.835,1.034,1.27,0.957,0.9,0.786]; /*%%PART%%*/
+const PART_NSI=[0.322,0.206,0.224,0.319,0.18,0.207,0.113]; /*%%PART_NSI%%*/
+const CE_NMV_26=[7.58,18.991,20.031,11.395,18.429,14.201,3.512];
+const CE_NMV_25=[4.365,6.626,7.152,10.566,10.245,10.639,13.122];
+const CE_NSI_26=[62.2,155.2,162.1,88.1,150.7,98.8,32.8];
+const CE_NSI_25=[45.0,61.1,71.3,104.5,118.0,108.6,141.5];
+const CE_PART=[3.733,2.22,2.778,3.489,2.788,2.457,2.528];
+const CE_PART_NSI=[1.696,0.838,1.051,1.824,0.901,0.911,0.543];
+const DEFL_YOY = 1.324; // BM3 abr-26 — acum. jul-25→jun-26 = 32.4%
+let CHART_METRIC='nmv';
+let SCOPE='total';
+const charts={};
+
+function pct(v,partial){
+  if(v===null||v===undefined)return'—';
+  const s=(v>=0?'+':'')+v.toFixed(1)+'%';
+  return s+(partial?'<span class="partial-mark">*</span>':'');
+}
+function cls(v,partial){
+  if(v===null||v===undefined)return'neu';
+  return (v>=0?'pos':'neg')+(partial?' partial-val':'');
+}
+function itemUrl(id){return`https://articulo.mercadolibre.com.ar/${id.replace('MLA','MLA-')}`;}
+
+function cmpCard(title,metric,deflator){
+  const p=metric.partial||false;
+  const gNsi=(metric.snsi!=null&&metric.nnsi!=null)?(metric.nnsi-metric.snsi):null;
+  const ppFmt=(v,par)=>v==null?'—':((v>=0?'+':'')+v.toFixed(1)+' pp'+(par?'<span class="partial-mark">*</span>':''));
+  const dSnmv=deflator&&metric.snmv!=null?((1+metric.snmv/100)/deflator-1)*100:metric.snmv;
+  const dNnmv=deflator&&metric.nnmv!=null?((1+metric.nnmv/100)/deflator-1)*100:metric.nnmv;
+  const gNmv=(dSnmv!=null&&dNnmv!=null)?(dNnmv-dSnmv):null;
+  const nmvLbl=deflator?'Defla':'';
+  return`<div class="cmp-card">
+<div class="cmp-title">${title}</div>
+<div class="cmp-ref">${metric.ref||''}</div>
+<div class="cmp-row"><span class="cmp-lbl">Site NMV${nmvLbl?' <span style="font-size:9px;background:var(--blue);color:#fff;padding:1px 4px;border-radius:2px;font-weight:700">'+nmvLbl+'</span>':''}</span><span class="cmp-v ${cls(dSnmv,p)}">${pct(dSnmv,p)}</span></div>
+<div class="cmp-row"><span class="cmp-lbl">Site NSI</span><span class="cmp-v ${cls(metric.snsi,p)}">${pct(metric.snsi,p)}</span></div>
+<div class="cmp-row"><span class="cmp-lbl">Newsan NMV${nmvLbl?' <span style="font-size:9px;background:var(--blue);color:#fff;padding:1px 4px;border-radius:2px;font-weight:700">'+nmvLbl+'</span>':''}</span><span class="cmp-v ${cls(dNnmv,p)}">${pct(dNnmv,p)}</span></div>
+<div class="cmp-row"><span class="cmp-lbl">Newsan NSI</span><span class="cmp-v ${cls(metric.nnsi,p)}">${pct(metric.nnsi,p&&metric.nnsi!=null&&metric.nnsi<0)}</span></div>
+<div class="cmp-row gap-row"><span class="cmp-lbl gap-lbl">Gap NMV${nmvLbl?' Defla':''} (NS vs MLA)</span><span class="cmp-v ${cls(gNmv,p&&gNmv!=null&&gNmv<0)}">${ppFmt(gNmv,p)}</span></div>
+<div class="cmp-row gap-row" style="margin-top:2px"><span class="cmp-lbl gap-lbl">Gap NSI (NS vs MLA)</span><span class="cmp-v ${cls(gNsi,p&&gNsi!=null&&gNsi<0)}">${ppFmt(gNsi,p)}</span></div>
+</div>`;
+}
+
+function renderScopeData(d, idx, scope){
+  const src = scope==='ce' ? d.ce : d;
+  const is_nrt = scope!=='ce' && d.nrt;
+  const scopeLbl = scope==='ce' ? ' <span style="font-size:10px;background:#3483FA;color:#fff;padding:1px 6px;border-radius:3px;margin-left:4px">CE</span>' : '';
+  const nrtBanner = is_nrt ? `<div class="warn-nrt">⚡ Datos en tiempo real (NRT) — día en curso. Comparaciones marcadas con * son vs días completos y no directamente comparables.</div>` : '';
+  const asp_ns=(src.ns.nmv*1e6/src.ns.nsi).toFixed(0);
+  const part_nmv=(src.ns.nmv/(src.site.nmv*1000)*100).toFixed(3);
+  const part_nsi=(src.ns.nsi/src.site.nsi*100).toFixed(3);
+  const scopeRef = scope==='ce' ? 'del CE (HOME ELECTRONICS + TECHNOLOGY)' : 'del total MLA';
+  const kpis=`
+<div class="kpi-grid kpi-grid-4">
+  <div class="kpi-card g"><div class="kpi-lbl">NMV Newsan</div><div class="kpi-val">${src.ns.nmv.toFixed(2)} mm</div><div class="kpi-sub">ARS · ASP $${parseInt(asp_ns).toLocaleString('es-AR')}</div></div>
+  <div class="kpi-card g"><div class="kpi-lbl">NSI Newsan</div><div class="kpi-val">${src.ns.nsi.toLocaleString('es-AR')}</div><div class="kpi-sub">Unidades vendidas</div></div>
+  <div class="kpi-card o"><div class="kpi-lbl">Part. NMV</div><div class="kpi-val">${part_nmv}%</div><div class="kpi-sub">${scopeRef}</div></div>
+  <div class="kpi-card o"><div class="kpi-lbl">Part. NSI</div><div class="kpi-val">${part_nsi}%</div><div class="kpi-sub">${scopeRef}</div></div>
+</div>`;
+  const comps=`<div class="cmp-grid">
+  ${cmpCard('YoY — vs mismo día 2025',{snmv:src.yoy.snmv,snsi:src.yoy.snsi,nnmv:src.yoy.nnmv,nnsi:src.yoy.nnsi,partial:src.yoy.partial,ref:'vs '+d.fecha.replace('2026','2025')},DEFL_YOY)}
+  ${cmpCard('MoM — vs fecha doble anterior',{snmv:src.mom.snmv,snsi:src.mom.snsi,nnmv:src.mom.nnmv,nnsi:src.mom.nnsi,partial:src.mom&&src.mom.partial,ref:src.mom.ref})}
+  ${cmpCard('vs Día Anterior',{snmv:src.da.snmv,snsi:src.da.snsi,nnmv:src.da.nnmv,nnsi:src.da.nnsi,partial:src.da&&src.da.partial,ref:src.da.ref})}
+  ${cmpCard('vs Semana Anterior',{snmv:src.sa.snmv,snsi:src.sa.snsi,nnmv:src.sa.nnmv,nnsi:src.sa.nnsi,partial:src.sa&&src.sa.partial,ref:src.sa.ref})}
+</div>`;
+  const footnote = is_nrt ? '<div class="footnote">* Comparaciones marcadas con asterisco son vs días completos — no directamente comparables.</div>' : '';
+  return`${nrtBanner}
+<div class="sec-label">Performance · ${d.label}${scopeLbl}</div>
+${kpis}
+<div class="sec-label">Comparaciones</div>
+${comps}
+${footnote}`;
+}
+
+function renderSlide(d,idx){
+  const catsRows=d.cats.map((c,i)=>`<tr>
+  <td class="rk">${i+1}</td><td>${c.c}</td>
+  <td class="num">${c.nmv.toFixed(2)} mm</td><td class="num">${c.nsi.toLocaleString()}</td><td class="sh">${c.sh.toFixed(2)}%</td>
+</tr>`).join('');
+  const itemsRows=d.items.map((it,i)=>`<tr>
+  <td class="rk">${i+1}</td>
+  <td><a href="${itemUrl(it.id)}" target="_blank"><span class="item-ttl">${it.t}</span><span class="item-id">${it.id}</span></a></td>
+  <td class="num">${it.nmv.toFixed(2)} mm</td><td class="num">${it.nsi}</td><td class="sh">${it.sh.toFixed(2)}%</td>
+</tr>`).join('');
+  return`<div class="slide ${idx===0?'active':''}" id="slide-${idx}">
+<div class="container">
+  <div id="scope-data-${idx}">${renderScopeData(d,idx,SCOPE)}</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:8px">
+    <div class="sec-label" style="margin-bottom:0">Evolución — todas las Fechas Dobles</div>
+    <div style="display:flex;gap:4px" id="metric-toggle-${idx}">
+      <button onclick="switchMetric('nmv',${idx})" id="btn-nmv-${idx}"
+        style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:var(--primary);color:#fff;cursor:pointer">NMV</button>
+      <button onclick="switchMetric('nsi',${idx})" id="btn-nsi-${idx}"
+        style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:transparent;color:var(--primary);cursor:pointer">NSI</button>
+    </div>
+  </div>
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-ttl" id="chart-ttl-${idx}">Evolución NMV Site — todas las Fechas Dobles (bn ARS)</div>
+      <canvas id="cnmv-${idx}" height="85"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-ttl" id="part-ttl-${idx}">Participación Newsan en NMV (%)</div>
+      <canvas id="cpart-${idx}" height="85"></canvas>
+    </div>
+  </div>
+  <div class="sec-label">Detalle Grupo Newsan</div>
+  <div class="tables-row">
+    <div class="tbl-card">
+      <div class="tbl-head"><span class="tbl-head-ttl">Top 10 Categorías</span><span class="tbl-head-sub">${d.fd} · Newsan</span></div>
+      <table><thead><tr><th>#</th><th>Categoría</th><th class="r">NMV (mm)</th><th class="r">NSI</th><th class="r">Share</th></tr></thead><tbody>${catsRows}</tbody></table>
+    </div>
+    <div class="tbl-card">
+      <div class="tbl-head"><span class="tbl-head-ttl">Top 10 Ítems</span><span class="tbl-head-sub">${d.fd} · Newsan</span></div>
+      <table><thead><tr><th>#</th><th>Ítem</th><th class="r">NMV (mm)</th><th class="r">NSI</th><th class="r">Share</th></tr></thead><tbody>${itemsRows}</tbody></table>
+    </div>
+  </div>
+  ${d.bpc ? renderBPC(d.bpc) : ''}
+</div>
+</div>`;
+}
+
+// Render
+const cont=document.getElementById('slides');
+FECHAS.forEach((d,i)=>{cont.innerHTML+=renderSlide(d,i);});
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const idx=parseInt(tab.dataset.fd);
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('slide-'+idx).classList.add('active');
+    // Re-renderizar scope-data si el scope actual no es 'total' (ya fue renderizado con total)
+    if(SCOPE!=='total'){
+      const scopeEl=document.getElementById('scope-data-'+idx);
+      if(scopeEl) scopeEl.innerHTML=renderScopeData(FECHAS[idx],idx,SCOPE);
+    }
+    initCharts(idx);
+  });
+});
+
+function buildMainChart(idx, metric){
+  const GRID='#EDEEF1',TICK='#9E9E9E',TICK2='#616161';
+  const isNmv = metric==='nmv';
+  const isCe  = SCOPE==='ce';
+  const d26   = isNmv ? (isCe?CE_NMV_26:NMV_26) : (isCe?CE_NSI_26:NSI_26);
+  const d25   = isNmv ? (isCe?CE_NMV_25:NMV_25) : (isCe?CE_NSI_25:NSI_25);
+  const unit  = isNmv ? ' bn' : 'k';
+  const scope_lbl = isCe ? ' CE' : '';
+  const lbl26 = isNmv ? `2026${scope_lbl} (bn ARS)` : `2026${scope_lbl} (k unidades)`;
+  const lbl25 = isNmv ? `2025${scope_lbl} (bn ARS)` : `2025${scope_lbl} (k unidades)`;
+  return {
+    type:'bar',
+    data:{
+      labels:LABELS,
+      datasets:[
+        {label:lbl26,data:d26,backgroundColor:d26.map((_,i)=>i===idx?'#FFE600':'rgba(255,230,0,0.4)'),borderColor:d26.map((_,i)=>i===idx?'#E6B800':'rgba(255,230,0,0.5)'),borderWidth:1,borderRadius:4},
+        {label:lbl25,data:d25,backgroundColor:d25.map((_,i)=>i===idx?'rgba(29,45,80,0.75)':'rgba(29,45,80,0.25)'),borderColor:'rgba(29,45,80,0.4)',borderWidth:1,borderRadius:4}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{labels:{font:{size:11},color:TICK2}}},
+      scales:{
+        y:{grid:{color:GRID},ticks:{color:TICK,font:{size:10},callback:v=>v+unit}},
+        x:{grid:{display:false},ticks:{color:TICK2,font:{size:11,weight:'bold'}}}
+      }
+    }
+  };
+}
+
+function buildPartChart(idx, metric){
+  const GRID='#EDEEF1',TICK='#9E9E9E',TICK2='#616161';
+  const isCe = SCOPE==='ce';
+  const partData = metric==='nmv' ? (isCe?CE_PART:PART) : (isCe?CE_PART_NSI:PART_NSI);
+  const maxVal   = isCe ? (metric==='nmv'?5:2.5) : (metric==='nmv'?2:0.6);
+  const scopeTag = isCe?' CE':'';
+  const lbl      = metric==='nmv' ? `Part. Newsan NMV${scopeTag} (%)` : `Part. Newsan NSI${scopeTag} (%)`;
+  return {
+    type:'line',
+    data:{
+      labels:LABELS,
+      datasets:[{
+        label:lbl, data:partData,
+        borderColor:'#00A650',backgroundColor:'rgba(0,166,80,0.08)',fill:true,tension:0.35,
+        pointBackgroundColor:partData.map((_,i)=>i===idx?'#00A650':'rgba(0,166,80,0.4)'),
+        pointRadius:partData.map((_,i)=>i===idx?7:4),
+        pointBorderColor:'#fff',pointBorderWidth:2
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{labels:{font:{size:11},color:TICK2}}},
+      scales:{
+        y:{min:0,max:maxVal,grid:{color:GRID},ticks:{color:TICK,font:{size:10},callback:v=>v+'%'}},
+        x:{grid:{display:false},ticks:{color:TICK2,font:{size:11}}}
+      }
+    }
+  };
+}
+
+function initCharts(idx){
+  if(charts['n'+idx])return;
+  charts['n'+idx]=new Chart(document.getElementById('cnmv-'+idx).getContext('2d'), buildMainChart(idx,CHART_METRIC));
+  charts['p'+idx]=new Chart(document.getElementById('cpart-'+idx).getContext('2d'), buildPartChart(idx,CHART_METRIC));
+}
+
+function switchMetric(metric, idx){
+  if(CHART_METRIC===metric) return;
+  CHART_METRIC=metric;
+
+  // Actualizar botones en todas las slides visibles
+  document.querySelectorAll('[id^="btn-nmv-"]').forEach(b=>{
+    b.style.background = metric==='nmv'?'var(--primary)':'transparent';
+    b.style.color      = metric==='nmv'?'#fff':'var(--primary)';
+  });
+  document.querySelectorAll('[id^="btn-nsi-"]').forEach(b=>{
+    b.style.background = metric==='nsi'?'var(--primary)':'transparent';
+    b.style.color      = metric==='nsi'?'#fff':'var(--primary)';
+  });
+
+  // Actualizar títulos y charts del tab activo
+  const isNmv = metric==='nmv';
+  const ttl = document.getElementById('chart-ttl-'+idx);
+  const pttl= document.getElementById('part-ttl-'+idx);
+  if(ttl)  ttl.textContent  = isNmv ? 'Evolución NMV Site — todas las Fechas Dobles (bn ARS)' : 'Evolución NSI Site — todas las Fechas Dobles (k unidades)';
+  if(pttl) pttl.textContent = isNmv ? 'Participación Newsan en NMV (%)' : 'Participación Newsan en NSI (%)';
+
+  // Destruir y recrear los charts del tab activo
+  if(charts['n'+idx]){ charts['n'+idx].destroy(); delete charts['n'+idx]; }
+  if(charts['p'+idx]){ charts['p'+idx].destroy(); delete charts['p'+idx]; }
+  initCharts(idx);
+}
+
+function switchScope(scope){
+  if(SCOPE===scope) return;
+  SCOPE=scope;
+  // Actualizar botones de scope
+  const btnTotal=document.getElementById('scope-btn-total');
+  const btnCe=document.getElementById('scope-btn-ce');
+  if(btnTotal){
+    btnTotal.style.background=scope==='total'?'rgba(255,255,255,.9)':'transparent';
+    btnTotal.style.color=scope==='total'?'var(--navy-dark)':'rgba(255,255,255,.6)';
+    btnTotal.style.borderColor=scope==='total'?'rgba(255,255,255,.7)':'rgba(255,255,255,.4)';
+  }
+  if(btnCe){
+    btnCe.style.background=scope==='ce'?'rgba(255,255,255,.9)':'transparent';
+    btnCe.style.color=scope==='ce'?'var(--navy-dark)':'rgba(255,255,255,.6)';
+    btnCe.style.borderColor=scope==='ce'?'rgba(255,255,255,.7)':'rgba(255,255,255,.4)';
+  }
+  // Re-renderizar KPIs + comparaciones del tab activo
+  const activeTab=document.querySelector('.tab.active');
+  const idx=activeTab?parseInt(activeTab.dataset.fd):0;
+  const scopeEl=document.getElementById('scope-data-'+idx);
+  if(scopeEl) scopeEl.innerHTML=renderScopeData(FECHAS[idx],idx,scope);
+  // Actualizar charts
+  if(charts['n'+idx]){charts['n'+idx].destroy();delete charts['n'+idx];}
+  if(charts['p'+idx]){charts['p'+idx].destroy();delete charts['p'+idx];}
+  initCharts(idx);
+  // Actualizar títulos de charts
+  const ttl=document.getElementById('chart-ttl-'+idx);
+  const pttl=document.getElementById('part-ttl-'+idx);
+  const isNmv=CHART_METRIC==='nmv';
+  const scopeTag=scope==='ce'?' CE':'';
+  if(ttl)  ttl.textContent=isNmv?`Evolución NMV${scopeTag} Site — Fechas Dobles (bn ARS)`:`Evolución NSI${scopeTag} Site — Fechas Dobles (k unidades)`;
+  if(pttl) pttl.textContent=isNmv?`Participación Newsan NMV${scopeTag} (%)`:`Participación Newsan NSI${scopeTag} (%)`;
+}
+
+initCharts(0);
+</script>
+</body>
+</html>

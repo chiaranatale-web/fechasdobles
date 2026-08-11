@@ -133,8 +133,7 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
   <div class="header-brand">BI Planning MLA · Grupo Newsan · 2026</div>
   <h1 class="header-title">Fechas <span class="acc">Dobles</span> 2026</h1>
   <div class="header-sub">
-    Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07
-    <span class="badge-nrt">⚡ 7/7 = NRT (día en curso)</span>
+    Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07 · 08/08
     <span class="badge-ts">Fuente: BT_ORDERS_MLA · BT_ORDERS_MLA_NRT</span>
     <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 10/08 09:45 AR [BATCH]</span> <!--%%LAST_UPDATE%%-->
   </div>
@@ -149,7 +148,7 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
     <button class="tab" data-fd="4">5/5</button>
     <button class="tab" data-fd="5">6/6</button>
     <button class="tab" data-fd="6">7/7</button>
-    <button class="tab" data-fd="7">8/8 <span class="tag-nrt">⚡NRT</span></button>
+    <button class="tab" data-fd="7">8/8</button>
   </div>
   <div style="display:flex;gap:4px;padding-right:16px;align-items:center">
     <span style="font-size:10px;color:rgba(255,255,255,.45);margin-right:4px;text-transform:uppercase;letter-spacing:.06em">Scope</span>
@@ -645,16 +644,53 @@ ${comps}
 ${footnote}`;
 }
 
-function renderSlide(d,idx){
-  const catsRows=d.cats.map((c,i)=>`<tr>
+let TABLE_METRIC='nmv';
+
+function renderCatsRows(cats, metric){
+  const isNmv = metric==='nmv';
+  const sorted = [...cats].sort((a,b)=>isNmv?(b.nmv-a.nmv):(b.nsi-a.nsi));
+  const total = sorted.reduce((s,c)=>s+(isNmv?c.nmv:c.nsi),0);
+  return sorted.map((c,i)=>`<tr>
   <td class="rk">${i+1}</td><td>${c.c}</td>
-  <td class="num">${c.nmv.toFixed(2)} mm</td><td class="num">${c.nsi.toLocaleString()}</td><td class="sh">${c.sh.toFixed(2)}%</td>
+  <td class="num"${isNmv?'':' style="color:var(--muted)"'}>${c.nmv.toFixed(2)} mm</td>
+  <td class="num"${isNmv?' style="color:var(--muted)"':''}>${c.nsi.toLocaleString()}</td>
+  <td class="sh">${(total>0?(isNmv?c.nmv:c.nsi)/total*100:c.sh).toFixed(2)}%</td>
 </tr>`).join('');
-  const itemsRows=d.items.map((it,i)=>`<tr>
+}
+
+function renderItemsRows(items, metric){
+  const isNmv = metric==='nmv';
+  const sorted = [...items].sort((a,b)=>isNmv?(b.nmv-a.nmv):(b.nsi-a.nsi));
+  const total = sorted.reduce((s,it)=>s+(isNmv?it.nmv:it.nsi),0);
+  return sorted.map((it,i)=>`<tr>
   <td class="rk">${i+1}</td>
   <td><a href="${itemUrl(it.id)}" target="_blank"><span class="item-ttl">${it.t}</span><span class="item-id">${it.id}</span></a></td>
-  <td class="num">${it.nmv.toFixed(2)} mm</td><td class="num">${it.nsi}</td><td class="sh">${it.sh.toFixed(2)}%</td>
+  <td class="num"${isNmv?'':' style="color:var(--muted)"'}>${it.nmv.toFixed(2)} mm</td>
+  <td class="num"${isNmv?' style="color:var(--muted)"':''}>${it.nsi}</td>
+  <td class="sh">${total>0?((isNmv?it.nmv:it.nsi)/total*100).toFixed(2):it.sh.toFixed(2)}%</td>
 </tr>`).join('');
+}
+
+function switchTableMetric(metric, idx){
+  TABLE_METRIC=metric;
+  const d=FECHAS[idx];
+  const catsTbody=document.getElementById('cats-tbody-'+idx);
+  const itemsTbody=document.getElementById('items-tbody-'+idx);
+  if(catsTbody) catsTbody.innerHTML=renderCatsRows(d.cats, metric);
+  if(itemsTbody) itemsTbody.innerHTML=renderItemsRows(d.items, metric);
+  // update column headers
+  ['cats-th-nmv-'+idx,'items-th-nmv-'+idx].forEach(id=>{const el=document.getElementById(id);if(el)el.style.fontWeight=metric==='nmv'?'800':'400';});
+  ['cats-th-nsi-'+idx,'items-th-nsi-'+idx].forEach(id=>{const el=document.getElementById(id);if(el)el.style.fontWeight=metric==='nsi'?'800':'400';});
+  // update toggle buttons
+  ['tbl-btn-nmv-'+idx,'tbl-btn-nsi-'+idx].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const active=el.dataset.metric===metric;
+    el.style.background=active?'var(--primary)':'transparent';
+    el.style.color=active?'#fff':'var(--primary)';
+  });
+}
+
+function renderSlide(d,idx){
   return`<div class="slide ${idx===0?'active':''}" id="slide-${idx}">
 <div class="container">
   <div id="scope-data-${idx}">${renderScopeData(d,idx,SCOPE)}</div>
@@ -677,15 +713,23 @@ function renderSlide(d,idx){
       <canvas id="cpart-${idx}" height="85"></canvas>
     </div>
   </div>
-  <div class="sec-label">Detalle Grupo Newsan</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+    <div class="sec-label" style="margin-bottom:0">Detalle Grupo Newsan</div>
+    <div style="display:flex;gap:4px">
+      <button id="tbl-btn-nmv-${idx}" data-metric="nmv" onclick="switchTableMetric('nmv',${idx})"
+        style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:var(--primary);color:#fff;cursor:pointer">NMV</button>
+      <button id="tbl-btn-nsi-${idx}" data-metric="nsi" onclick="switchTableMetric('nsi',${idx})"
+        style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:transparent;color:var(--primary);cursor:pointer">NSI</button>
+    </div>
+  </div>
   <div class="tables-row">
     <div class="tbl-card">
       <div class="tbl-head"><span class="tbl-head-ttl">Top 10 Categorías</span><span class="tbl-head-sub">${d.fd} · Newsan</span></div>
-      <table><thead><tr><th>#</th><th>Categoría</th><th class="r">NMV (mm)</th><th class="r">NSI</th><th class="r">Share</th></tr></thead><tbody>${catsRows}</tbody></table>
+      <table><thead><tr><th>#</th><th>Categoría</th><th class="r" id="cats-th-nmv-${idx}">NMV (mm)</th><th class="r" id="cats-th-nsi-${idx}">NSI</th><th class="r">Share</th></tr></thead><tbody id="cats-tbody-${idx}">${renderCatsRows(d.cats,'nmv')}</tbody></table>
     </div>
     <div class="tbl-card">
       <div class="tbl-head"><span class="tbl-head-ttl">Top 10 Ítems</span><span class="tbl-head-sub">${d.fd} · Newsan</span></div>
-      <table><thead><tr><th>#</th><th>Ítem</th><th class="r">NMV (mm)</th><th class="r">NSI</th><th class="r">Share</th></tr></thead><tbody>${itemsRows}</tbody></table>
+      <table><thead><tr><th>#</th><th>Ítem</th><th class="r" id="items-th-nmv-${idx}">NMV (mm)</th><th class="r" id="items-th-nsi-${idx}">NSI</th><th class="r">Share</th></tr></thead><tbody id="items-tbody-${idx}">${renderItemsRows(d.items,'nmv')}</tbody></table>
     </div>
   </div>
   ${d.bpc ? renderBPC(d.bpc) : ''}

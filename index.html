@@ -97,6 +97,14 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
 .item-id{display:block;font-size:10px;color:var(--muted)}
 
 .footnote{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.6}
+.mom-section{margin-top:24px}
+.mom-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.mom-bar-row{display:grid;grid-template-columns:160px 1fr 64px;align-items:center;gap:8px;margin-bottom:6px;font-size:11px}
+.mom-bar-wrap{height:14px;border-radius:3px;overflow:hidden;background:var(--border-soft);position:relative}
+.mom-bar-pos{background:var(--green);height:100%;border-radius:3px}
+.mom-bar-neg{background:var(--red);height:100%;border-radius:3px;margin-left:auto}
+.mom-val-pos{color:var(--green);font-weight:700;text-align:right}
+.mom-val-neg{color:var(--red);font-weight:700;text-align:right}
 
 /* BPC */
 .bpc-section{margin-top:24px}
@@ -135,7 +143,7 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
   <div class="header-sub">
     Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07 · 08/08
     <span class="badge-ts">Fuente: BT_ORDERS_MLA · BT_ORDERS_MLA_NRT</span>
-    <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 10/08 09:45 AR [BATCH]</span> <!--%%LAST_UPDATE%%-->
+    <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 11/08 14:39 AR [BATCH]</span> <!--%%LAST_UPDATE%%-->
   </div>
 </header>
 
@@ -460,20 +468,75 @@ const FECHAS=[
     label:'8 Agosto 2026',
     fecha:'2026-08-08',
     nrt:false,
-    site:{nmv:45.752,nsi:895900},
-    ns:{nmv:313.8,nsi:1413,part:0.686},
-    yoy:{snmv:21.4,snsi:0.1,nnmv:46.3,nnsi:16.8,partial:false,ref:'2025-08-08'},
-    mom:{snmv:-14.3,snsi:-15.6,nnmv:-39.6,nnsi:-10.1,ref:'vs 7/7/2026',partial:false},
-    da:{snmv:-9.3,snsi:-13.7,nnmv:11.4,nnsi:30.9,ref:'vs 07/08/2026',partial:false},
-    sa:{snmv:24.6,snsi:21.0,nnmv:18.6,nnsi:42.2,ref:'vs 01/08/2026',partial:false},
-    cats:[{c:'LARGE APPLIANCES',nmv:130.95,nsi:248,sh:41.73},{c:'TELEVISIONS & STREAMING DEVICES',nmv:74.62,nsi:145,sh:23.78},{c:'SMALL APPLIANCES',nmv:19.01,nsi:326,sh:6.06},{c:'SMARTPHONES & TABLETS',nmv:17.69,nsi:62,sh:5.64},{c:'HEATING, COOLING & AIR QUALITY',nmv:15.54,nsi:25,sh:4.95},{c:'COMPUTERS & NOTEBOOKS',nmv:9.05,nsi:24,sh:2.88},{c:'AUDIO & GENERAL ELECTRONICS',nmv:8.72,nsi:52,sh:2.78},{c:'MATTRESSES & SOMMIER',nmv:6.1,nsi:27,sh:1.94},{c:'FURNITURE',nmv:4.22,nsi:64,sh:1.35},{c:'HOME OUTDOORS',nmv:3.9,nsi:24,sh:1.24}],
-    items:[{id:'MLA3112007154',t:'Lavarropas Philco 11 Kg Carga Frontal Inverter Slim Fit Grey Gris',nmv:17.32,nsi:21,sh:5.52},{id:'MLA2106480258',t:'Heladera Philco One Door Cíclica Con Dispenser 164l Inox - Phsd170xd Gris',nmv:15.01,nsi:30,sh:4.78},{id:'MLA1741014937',t:'Smart Tv 50 Noblex Roku Tv Fhd Db50x3110',nmv:11.36,nsi:21,sh:3.62},{id:'MLA1824380111',t:'Lavarropas 6kg Carga Frontal Philco Inverter Blanco',nmv:11.3,nsi:20,sh:3.6},{id:'MLA3112006460',t:'Lavarropas Philco 11 Kg Carga Frontal Inverter Slim Fit Blanco',nmv:9.84,nsi:12,sh:3.14},{id:'MLA1515631171',t:'Smart Tv Philco Pld32hs24vh 32 Pulgadas Led Hd Vidaa',nmv:9.28,nsi:35,sh:2.96},{id:'MLA3518839514',t:'Tablet Philco Tp10a464 + Funda 10.1 4gb 64gb Android 13 Color Negro',nmv:7.72,nsi:38,sh:2.46},{id:'MLA1514475137',t:'Smart Tv Philco Pld43fs24vh 43 Pulgadas Led Full Hd',nmv:7.49,nsi:18,sh:2.39},{id:'MLA2239344776',t:'Smart Tv Noblex 75 Pulgadas Dq75x9600 4k Uhd Google Tv',nmv:6.24,nsi:4,sh:1.99},{id:'MLA2527508420',t:'Cocina A Gas Sansei Essential 50 Cm Negra Multigas Negro',nmv:5.86,nsi:15,sh:1.87}],
-    ce:{site:{nmv:12.859,nsi:101100},ns:{nmv:280.86,nsi:948},yoy:{snmv:22.0,snsi:-7.0,nnmv:47.4,nnsi:0.8,partial:false},mom:{snmv:-23.6,snsi:-23.6,nnmv:-42.8,nnsi:-7.2,ref:'vs 7/7/2026'},da:{snmv:-5.6,snsi:-17.1,nnmv:12.5,nnsi:41.4,ref:'vs 07/08/2026'},sa:{snmv:29.3,snsi:26.7,nnmv:16.2,nnsi:46.1,ref:'vs 01/08/2026'}},
-    he:{site:{nmv:5.528,nsi:42000},ns:{nmv:248.84,nsi:797},yoy:{snmv:37.6,snsi:6.1,nnmv:41.7,nnsi:-3.6,partial:false},mom:{snmv:-34.9,snsi:-34.2,nnmv:-44.3,nnsi:-9.1,ref:'vs 7/7/2026'},da:{snmv:1.0,snsi:-12.9,nnmv:21.5,nnsi:61.7,ref:'vs 07/08/2026'},sa:{snmv:20.3,snsi:20.7,nnmv:18.3,nnsi:56.3,ref:'vs 01/08/2026'}},
-    tech:{site:{nmv:7.332,nsi:59100},ns:{nmv:32.02,nsi:151},yoy:{snmv:12.5,snsi:-14.5,nnmv:114.9,nnsi:32.9,partial:false},mom:{snmv:-12.0,snsi:-13.7,nnmv:-27.0,nnsi:4.5,ref:'vs 7/7/2026'},da:{snmv:-10.1,snsi:-19.7,nnmv:-28.7,nnsi:-14.8,ref:'vs 07/08/2026'},sa:{snmv:37.0,snsi:31.6,nnmv:1.8,nnsi:9.0,ref:'vs 01/08/2026'}}
+    site:{nmv:45.209,nsi:885600},
+    ns:{nmv:311.88,nsi:1409,part:0.69},
+    yoy:{snmv:19.9,snsi:-1.0,nnmv:45.4,nnsi:16.5,partial:false,ref:'2025-08-08'},
+    mom:{snmv:-15.3,snsi:-16.5,nnmv:-40.0,nnsi:-10.3,ref:'vs 7/7/2026',partial:false},
+    da:{snmv:-9.6,snsi:-14.1,nnmv:11.6,nnsi:31.1,ref:'vs 07/08/2026',partial:false},
+    sa:{snmv:23.5,snsi:19.9,nnmv:18.2,nnsi:42.2,ref:'vs 01/08/2026',partial:false},
+    cats:[{c:'LARGE APPLIANCES',nmv:130.5,nsi:247,sh:41.84},{c:'TELEVISIONS & STREAMING DEVICES',nmv:73.5,nsi:143,sh:23.57},{c:'SMALL APPLIANCES',nmv:18.88,nsi:325,sh:6.05},{c:'SMARTPHONES & TABLETS',nmv:17.69,nsi:62,sh:5.67},{c:'HEATING, COOLING & AIR QUALITY',nmv:15.54,nsi:25,sh:4.98},{c:'COMPUTERS & NOTEBOOKS',nmv:9.05,nsi:24,sh:2.9},{c:'AUDIO & GENERAL ELECTRONICS',nmv:8.72,nsi:52,sh:2.8},{c:'MATTRESSES & SOMMIER',nmv:5.89,nsi:26,sh:1.89},{c:'FURNITURE',nmv:4.22,nsi:64,sh:1.35},{c:'HOME OUTDOORS',nmv:3.9,nsi:24,sh:1.25}],
+    items:[{id:'MLA3112007154',t:'Lavarropas Philco 11 Kg Carga Frontal Inverter Slim Fit Grey Gris',nmv:17.32,nsi:21,sh:5.55},{id:'MLA2106480258',t:'Heladera Philco One Door Cíclica Con Dispenser 164l Inox - Phsd170xd Gris',nmv:14.56,nsi:29,sh:4.67},{id:'MLA1741014937',t:'Smart Tv 50 Noblex Roku Tv Fhd Db50x3110',nmv:11.36,nsi:21,sh:3.64},{id:'MLA1824380111',t:'Lavarropas 6kg Carga Frontal Philco Inverter Blanco',nmv:11.3,nsi:20,sh:3.62},{id:'MLA3112006460',t:'Lavarropas Philco 11 Kg Carga Frontal Inverter Slim Fit Blanco',nmv:9.84,nsi:12,sh:3.16},{id:'MLA1515631171',t:'Smart Tv Philco Pld32hs24vh 32 Pulgadas Led Hd Vidaa',nmv:9.28,nsi:35,sh:2.98},{id:'MLA3518839514',t:'Tablet Philco Tp10a464 + Funda 10.1 4gb 64gb Android 13 Color Negro',nmv:7.72,nsi:38,sh:2.48},{id:'MLA1514475137',t:'Smart Tv Philco Pld43fs24vh 43 Pulgadas Led Full Hd',nmv:7.49,nsi:18,sh:2.4},{id:'MLA2239344776',t:'Smart Tv Noblex 75 Pulgadas Dq75x9600 4k Uhd Google Tv',nmv:6.24,nsi:4,sh:2},{id:'MLA2527508420',t:'Cocina A Gas Sansei Essential 50 Cm Negra Multigas Negro',nmv:5.86,nsi:15,sh:1.88}],
+    cats_mom:[{c:'ACC CARS & VANS',nmv:0.03,nsi:0.933539558,nmv_p:0.02,nsi_p:2},{c:'APPAREL ACCESSORIES',nmv:0.47,nsi:15.985343243,nmv_p:0.66,nsi_p:10},{c:'AUDIO & GENERAL ELECTRONICS',nmv:8.72,nsi:52.25844206,nmv_p:3.62,nsi_p:25},{c:'BABY',nmv:0,nsi:0,nmv_p:0.02,nsi_p:1},{c:'BEAUTY ELECTRONICS',nmv:2.92,nsi:24.191455331,nmv_p:3.05,nsi_p:54},{c:'CAMERAS & DRONES',nmv:0.1,nsi:0.928992529,nmv_p:0,nsi_p:0},{c:'COMPUTERS & NOTEBOOKS',nmv:9.05,nsi:24.653163054,nmv_p:11.41,nsi_p:23},{c:'CONSTRUCTION',nmv:0.29,nsi:1.908465078,nmv_p:3.67,nsi_p:5},{c:'CPG PERSONAL CARE',nmv:0.04,nsi:0.972681503,nmv_p:0.08,nsi_p:9},{c:'CYCLING AND OTHERS',nmv:2.65,nsi:6.502095878,nmv_p:0.33,nsi_p:9},{c:'FRAGRANCES',nmv:0.05,nsi:0.945538169,nmv_p:0,nsi_p:0},{c:'FURNITURE',nmv:4.22,nsi:64.018907109,nmv_p:5.09,nsi_p:74},{c:'HABERDASHERY',nmv:0.04,nsi:3.801456495,nmv_p:0,nsi_p:0},{c:'HAIR',nmv:0.01,nsi:0.967313048,nmv_p:0.28,nsi_p:25},{c:'HEALTH GOODS',nmv:0,nsi:0,nmv_p:0.07,nsi_p:3},{c:'HEATING, COOLING & AIR QUALITY',nmv:15.54,nsi:25.113669144,nmv_p:26.19,nsi_p:53},{c:'HOME OUTDOORS',nmv:3.9,nsi:24.403382964,nmv_p:4.16,nsi_p:28},{c:'HOUSEHOLD APPLIANCES PARTS',nmv:0,nsi:0,nmv_p:0.18,nsi_p:3},{c:'HOUSEHOLD ITEMS',nmv:0.81,nsi:48.598048239,nmv_p:4.16,nsi_p:125},{c:'INDOOR SPORTS',nmv:0.86,nsi:12.162002476,nmv_p:2.17,nsi_p:26},{c:'INDUSTRY',nmv:0.75,nsi:1.87777723,nmv_p:0.18,nsi_p:3},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:3.5,nsi:23.117707218,nmv_p:0.35,nsi_p:6},{c:'LARGE APPLIANCES',nmv:130.5,nsi:247.520478198,nmv_p:97.13,nsi_p:160},{c:'LIGHTING',nmv:0.13,nsi:9.298112842,nmv_p:0,nsi_p:0},{c:'MATTRESSES & SOMMIER',nmv:5.89,nsi:26.368296616,nmv_p:0,nsi_p:0},{c:'MOUNTAIN & OUTDOORS',nmv:2.04,nsi:86.439771744,nmv_p:1.98,nsi_p:94},{c:'OTHER MAINSTREAM SPORTS',nmv:0.03,nsi:0.956152564,nmv_p:0.12,nsi_p:5},{c:'OTHER SPORTS',nmv:0.5,nsi:7.075110097,nmv_p:0.11,nsi_p:3},{c:'PET',nmv:1.66,nsi:46.103198714,nmv_p:1.65,nsi_p:59},{c:'SECURITY',nmv:0.75,nsi:4.491703958,nmv_p:0.3,nsi_p:3},{c:'SMALL APPLIANCES',nmv:18.88,nsi:325.363862393,nmv_p:19.57,nsi_p:148},{c:'SMARTPHONES & TABLETS',nmv:17.69,nsi:62.073913198,nmv_p:31.17,nsi_p:65},{c:'SPORTS ACCESSORIES',nmv:0.2,nsi:2.833392832,nmv_p:0,nsi_p:0},{c:'STATIONERY',nmv:0,nsi:0,nmv_p:0.19,nsi_p:6},{c:'TELEVISIONS & STREAMING DEVICES',nmv:73.5,nsi:143.356129706,nmv_p:300.33,nsi_p:487},{c:'TEXTILES',nmv:0,nsi:0,nmv_p:0.08,nsi_p:3},{c:'TOOLS',nmv:3.07,nsi:61.969280528,nmv_p:0.05,nsi_p:2},{c:'TOYS AND GAMES',nmv:1.35,nsi:7.438782696,nmv_p:0.52,nsi_p:1},{c:'WATER SPORTS',nmv:0.09,nsi:3.806506068,nmv_p:0,nsi_p:0},{c:'WEARABLES',nmv:1.68,nsi:40.729583546,nmv_p:0.95,nsi_p:51}],
+    ce:{site:{nmv:12.727,nsi:100200},ns:{nmv:279.15,nsi:945},yoy:{snmv:20.8,snsi:-7.8,nnmv:46.5,nnsi:0.4,partial:false},mom:{snmv:-24.3,snsi:-24.2,nnmv:-43.1,nnsi:-7.4,ref:'vs 7/7/2026'},da:{snmv:-5.8,snsi:-17.1,nnmv:12.8,nnsi:41.7,ref:'vs 07/08/2026'},sa:{snmv:28.3,snsi:26.0,nnmv:15.8,nnsi:45.8,ref:'vs 01/08/2026'}},
+    he:{site:{nmv:5.46,nsi:41600},ns:{nmv:247.13,nsi:793},yoy:{snmv:35.9,snsi:5.1,nnmv:40.7,nnsi:-4.0,partial:false},mom:{snmv:-35.7,snsi:-34.7,nnmv:-44.7,nnsi:-9.4,ref:'vs 7/7/2026'},da:{snmv:0.7,snsi:-13.2,nnmv:21.1,nnsi:61.6,ref:'vs 07/08/2026'},sa:{snmv:19.2,snsi:19.9,nnmv:17.9,nnsi:55.8,ref:'vs 01/08/2026'}},
+    tech:{site:{nmv:7.267,nsi:58600},ns:{nmv:32.02,nsi:151},yoy:{snmv:11.5,snsi:-15.2,nnmv:114.9,nnsi:32.9,partial:false},mom:{snmv:-12.7,snsi:-14.5,nnmv:-27.0,nnsi:4.5,ref:'vs 7/7/2026'},da:{snmv:-10.2,snsi:-19.8,nnmv:-26.3,nnsi:-13.9,ref:'vs 07/08/2026'},sa:{snmv:36.2,snsi:30.8,nnmv:1.8,nnsi:9.0,ref:'vs 01/08/2026'}}
   }
 ];
 /*%%FECHAS_END%%*/
+
+function renderMoM(d){
+  if(!d.cats_mom||!d.cats_mom.length) return '';
+  const momRef = d.mom&&d.mom.ref ? d.mom.ref : 'fd anterior';
+  const totalPrev = d.cats_mom.reduce((s,c)=>s+c.nmv_p,0);
+  // calcular delta y contribución
+  const rows = d.cats_mom.map(c=>({
+    c:c.c, nmv:c.nmv, nmv_p:c.nmv_p, nsi:c.nsi, nsi_p:c.nsi_p,
+    delta: c.nmv - c.nmv_p,
+    contrib: totalPrev>0 ? (c.nmv-c.nmv_p)/totalPrev*100 : 0
+  })).sort((a,b)=>b.contrib-a.contrib);
+
+  const maxAbs = Math.max(...rows.map(r=>Math.abs(r.contrib)), 0.1);
+  const drivers = rows.filter(r=>r.contrib>0);
+  const draggers = rows.filter(r=>r.contrib<=0);
+
+  function barRows(items){
+    return items.map(r=>{
+      const pct = Math.abs(r.contrib)/maxAbs*100;
+      const isPos = r.contrib>=0;
+      const bar = isPos
+        ? `<div class="mom-bar-wrap"><div class="mom-bar-pos" style="width:${pct}%"></div></div>`
+        : `<div class="mom-bar-wrap"><div class="mom-bar-neg" style="width:${pct}%"></div></div>`;
+      const val = (isPos?'+':'')+r.contrib.toFixed(1)+' pp';
+      const cat = r.c.replace('HEATING, COOLING & AIR QUALITY','HC&AQ').replace('TELEVISIONS & STREAMING DEVICES','TVs & Streaming').replace('HOUSEHOLD APPLIANCES PARTS','HH Appl. Parts').replace('AUDIO & GENERAL ELECTRONICS','Audio & Electronics').replace('SMARTPHONES & TABLETS','Smartphones').replace('COMPUTERS & NOTEBOOKS','Computers').replace('CONSOLE GAMING HARDWARE','Gaming Hardware');
+      return `<div class="mom-bar-row"><span style="color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${r.c}">${cat}</span>${bar}<span class="${isPos?'mom-val-pos':'mom-val-neg'}">${val}</span></div>`;
+    }).join('');
+  }
+
+  const tblRows = rows.map((r,i)=>`<tr>
+  <td class="rk">${i+1}</td><td>${r.c}</td>
+  <td class="num">${r.nmv.toFixed(2)}</td><td class="num" style="color:var(--muted)">${r.nmv_p.toFixed(2)}</td>
+  <td class="num ${r.delta>=0?'pos':'neg'}">${r.delta>=0?'+':''}${r.delta.toFixed(2)}</td>
+  <td class="num ${r.contrib>=0?'pos':'neg'}">${r.contrib>=0?'+':''}${r.contrib.toFixed(1)} pp</td>
+</tr>`).join('');
+
+  return`<div class="mom-section">
+  <div class="sec-label">Drivers & Draggers MoM — ${momRef} · Newsan</div>
+  <div class="mom-grid">
+    <div class="bpc-bar-card">
+      <div class="chart-ttl" style="margin-bottom:12px;color:var(--green)">▲ Drivers</div>
+      ${drivers.length?barRows(drivers):'<span style="font-size:11px;color:var(--muted)">Sin drivers</span>'}
+      <div class="chart-ttl" style="margin-top:16px;margin-bottom:12px;color:var(--red)">▼ Draggers</div>
+      ${draggers.length?barRows(draggers):'<span style="font-size:11px;color:var(--muted)">Sin draggers</span>'}
+    </div>
+    <div class="tbl-card">
+      <div class="tbl-head"><span class="tbl-head-ttl">Contribución MoM por categoría (pp NMV)</span></div>
+      <table><thead><tr><th>#</th><th>Categoría</th><th class="r">NMV act.</th><th class="r">NMV ant.</th><th class="r">Δ NMV</th><th class="r">Contrib.</th></tr></thead>
+      <tbody>${tblRows}</tbody></table>
+    </div>
+  </div>
+  <div class="footnote">Contribución = (NMV cat. actual − NMV cat. anterior) / NMV total anterior × 100. NMV en mm ARS.</div>
+</div>`;
+}
 
 function renderBPC(bpc){
   const bars=bpc.brands.map(b=>{
@@ -549,30 +612,30 @@ function filterBPC(v){
 }
 
 const LABELS=['1/1','2/2','3/3','4/4','5/5','6/6','7/7','8/8']; /*%%LABELS%%*/
-const NMV_26=[25.398,61.89,61.493,36.292,59.124,43.315,53.417,45.752]; /*%%NMV_26%%*/
+const NMV_26=[25.398,61.89,61.493,36.292,59.124,43.315,53.396,45.209]; /*%%NMV_26%%*/
 const NMV_25=[15.348,22.083,24.153,33.458,36.343,35.598,45.213,37.697]; /*%%NMV_25%%*/
-const NSI_26=[517.1,1277.9,1271.6,743.5,1195.4,838.4,1061.1,895.9]; /*%%NSI_26%%*/
+const NSI_26=[517.1,1277.9,1271.6,743.5,1195.4,838.4,1060.9,885.6]; /*%%NSI_26%%*/
 const NSI_25=[368.2,552.1,599.1,763.7,883.2,808.9,1057.9,894.6]; /*%%NSI_25%%*/
-const PART=[1.381,0.835,1.034,1.27,0.957,0.899,0.973,0.686]; /*%%PART%%*/
-const PART_NSI=[0.322,0.206,0.224,0.319,0.18,0.206,0.148,0.158]; /*%%PART_NSI%%*/
-const CE_NMV_26=[7.579,18.989,20.033,11.395,18.426,14.117,16.828,12.859];
+const PART=[1.381,0.835,1.034,1.27,0.957,0.899,0.974,0.69]; /*%%PART%%*/
+const PART_NSI=[0.322,0.206,0.224,0.319,0.18,0.206,0.148,0.159]; /*%%PART_NSI%%*/
+const CE_NMV_26=[7.579,18.989,20.033,11.395,18.426,14.117,16.816,12.727];
 const CE_NMV_25=[4.364,6.625,7.152,10.565,10.244,10.638,13.122,10.536];
-const CE_NSI_26=[62.1,155.0,162.0,88.0,150.6,98.4,132.3,101.1];
+const CE_NSI_26=[62.1,155.0,162.0,88.0,150.6,98.4,132.2,100.2];
 const CE_NSI_25=[45.0,61.0,71.2,104.4,117.9,108.5,141.5,108.7];
-const CE_PART=[3.733,2.22,2.778,3.489,2.788,2.457,2.917,2.184];
-const CE_PART_NSI=[1.697,0.839,1.051,1.826,0.901,0.911,0.772,0.938];
-const HE_NMV_26=[3.682,8.325,8.033,5.334,8.273,6.946,8.496,5.528];
+const CE_PART=[3.733,2.22,2.778,3.489,2.788,2.457,2.919,2.193];
+const CE_PART_NSI=[1.697,0.839,1.051,1.826,0.901,0.911,0.772,0.943];
+const HE_NMV_26=[3.682,8.325,8.033,5.334,8.273,6.946,8.491,5.46];
 const HE_NMV_25=[1.978,3.108,3.156,4.686,3.888,4.38,5.905,4.018];
-const HE_NSI_26=[28.1,66.5,67.2,39.1,65.3,46.2,63.8,42.0];
+const HE_NSI_26=[28.1,66.5,67.2,39.1,65.3,46.2,63.7,41.6];
 const HE_NSI_25=[19.0,26.6,28.8,42.3,43.3,43.4,58.0,39.6];
-const HE_PART=[7.64,4.941,6.758,7.296,6.104,4.609,5.262,4.501];
-const HE_PART_NSI=[3.719,1.854,2.394,4.0,2.008,1.771,1.375,1.898];
-const TECH_NMV_26=[3.897,10.664,12,6.06,10.152,7.171,8.332,7.332];
+const HE_PART=[7.64,4.941,6.758,7.296,6.104,4.609,5.265,4.526];
+const HE_PART_NSI=[3.719,1.854,2.394,4.0,2.008,1.771,1.375,1.908];
+const TECH_NMV_26=[3.897,10.664,12,6.06,10.152,7.171,8.325,7.267];
 const TECH_NMV_25=[2.386,3.518,3.996,5.879,6.356,6.258,7.218,6.518];
-const TECH_NSI_26=[34.0,88.5,94.8,48.9,85.4,52.2,68.5,59.1];
+const TECH_NSI_26=[34.0,88.5,94.8,48.9,85.4,52.2,68.5,58.6];
 const TECH_NSI_25=[26.1,34.4,42.4,62.1,74.6,65.1,83.4,69.1];
-const TECH_PART=[0.041,0.096,0.113,0.138,0.086,0.372,0.527,0.437];
-const TECH_PART_NSI=[0.026,0.077,0.099,0.088,0.054,0.149,0.212,0.256];
+const TECH_PART=[0.041,0.096,0.113,0.138,0.086,0.372,0.527,0.441];
+const TECH_PART_NSI=[0.026,0.077,0.099,0.088,0.054,0.149,0.212,0.259];
 const DEFL_YOY = 1.324; // BM3 abr-26 — acum. jul-25→jun-26 = 32.4%
 let CHART_METRIC='nmv';
 let SCOPE='total';
@@ -732,6 +795,7 @@ function renderSlide(d,idx){
       <table><thead><tr><th>#</th><th>Ítem</th><th class="r" id="items-th-nmv-${idx}">NMV (mm)</th><th class="r" id="items-th-nsi-${idx}">NSI</th><th class="r">Share</th></tr></thead><tbody id="items-tbody-${idx}">${renderItemsRows(d.items,'nmv')}</tbody></table>
     </div>
   </div>
+  ${renderMoM(d)}
   ${d.bpc ? renderBPC(d.bpc) : ''}
 </div>
 </div>`;

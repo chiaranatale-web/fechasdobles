@@ -143,7 +143,7 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
   <div class="header-sub">
     Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07 · 08/08 · 09/09
     <span class="badge-ts">Fuente: BT_ORDERS_MLA · BT_ORDERS_MLA_NRT</span>
-    <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 09/09 11:22 AR [NRT ⚡ corte 11:22]</span> <!--%%LAST_UPDATE%%-->
+    <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 09/09 11:56 AR [NRT ⚡ corte 11:56]</span> <!--%%LAST_UPDATE%%-->
   </div>
 </header>
 
@@ -179,6 +179,8 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
   <span style="font-size:11px;color:var(--text)"><b>NSI</b> = Unidades</span>
   <span style="color:var(--border);font-size:11px">·</span>
   <span style="font-size:11px;color:var(--text)"><b>NASP</b> = Ticket promedio</span>
+  <span style="color:var(--border);font-size:11px">·</span>
+  <span style="font-size:11px;color:var(--text)"><b>Visitas</b> = visitas a publicaciones (no desglosada por scope)</span>
   <span style="color:var(--border);font-size:11px">·</span>
   <span style="font-size:11px;color:var(--text)"><b>Total Site</b> = <span id="glosario-scope">Total MLA</span></span>
   <span style="color:var(--border);font-size:11px">·</span>
@@ -488,20 +490,21 @@ const FECHAS=[
     label:'9 Septiembre 2026',
     fecha:'2026-09-09',
     nrt:true,
-    cutoff:'11:22',
-    site:{nmv:16.015,nsi:324400},
-    ns:{nmv:114.61,nsi:603,part:0.716},
-    yoy:{snmv:30.5,snsi:16.4,nnmv:-46.2,nnsi:-31.7,partial:true,ref:'2025-09-09'},
-    mom:{snmv:66.0,snsi:66.0,nnmv:67.7,nnsi:65.2,ref:'vs 8/8/2026',partial:true},
-    da:{snmv:11.3,snsi:5.9,nnmv:34.8,nnsi:31.8,ref:'vs 08/09/2026',partial:true},
-    sa:{snmv:15.3,snsi:9.0,nnmv:67.7,nnsi:77.6,ref:'vs 02/09/2026',partial:true},
+    cutoff:'11:56',
+    visits_cutoff:'10:00',
+    site:{nmv:16.015,nsi:324400,visits:13169277},
+    ns:{nmv:114.61,nsi:603,part:0.716,visits:31511,part_visits:0.239},
+    yoy:{snmv:11.1,snsi:-0.3,svis:35.0,nnmv:-54.3,nnsi:-41.6,nvis:-68.2,partial:true,ref:'2025-09-09'},
+    mom:{snmv:35.4,snsi:36.8,svis:-99.3,nnmv:37.9,nnsi:38.6,nvis:-99.2,ref:'vs 8/8/2026',partial:true},
+    da:{snmv:-5.8,snsi:-9.7,svis:11.2,nnmv:6.2,nnsi:9.1,nvis:15.2,ref:'vs 08/09/2026',partial:true},
+    sa:{snmv:-1.9,snsi:-6.8,svis:-93.1,nnmv:47.3,nnsi:48.4,nvis:-90.7,ref:'vs 02/09/2026',partial:true},
     cats:[{c:'LARGE APPLIANCES',nmv:30.1,nsi:66,sh:26.27},{c:'TELEVISIONS & STREAMING DEVICES',nmv:25.47,nsi:46,sh:22.23},{c:'COMPUTERS & NOTEBOOKS',nmv:16.07,nsi:19,sh:14.02},{c:'HEATING, COOLING & AIR QUALITY',nmv:9.58,nsi:14,sh:8.36},{c:'SMARTPHONES & TABLETS',nmv:9.37,nsi:34,sh:8.17},{c:'SMALL APPLIANCES',nmv:8.51,nsi:91,sh:7.42},{c:'MATTRESSES & SOMMIER',nmv:2.5,nsi:11,sh:2.18},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:2.06,nsi:14,sh:1.79},{c:'AUDIO & GENERAL ELECTRONICS',nmv:1.98,nsi:12,sh:1.73},{c:'CONSTRUCTION',nmv:1.1,nsi:2,sh:0.96}],
     items:[{id:'MLA3168592134',t:'Smart Tv Noblex 50 Pulgadas Full Hd Con Roku Tv',nmv:11.99,nsi:22,sh:10.46},{id:'MLA1873909966',t:'Heladera 4 Puertas Hisense Pantalla Smart Inverter 640l Negro',nmv:5.36,nsi:1,sh:4.67},{id:'MLA1696043135',t:'Televisor LG Nanocell Ai 55 Pulgadas Smart 4k - 55nano80asa',nmv:5.07,nsi:6,sh:4.43},{id:'MLA3896799674',t:'Notebook Asus Vivobook Go 15 15.6  X1504za Intel Core I7-1255u 16gb 512gb 60hz Windows 11 Color Azul Quiet Blue',nmv:4.81,nsi:3,sh:4.2},{id:'MLA1514481085',t:'Aire Acondicionado Siam Split Onoff Frio Calor Color Blanco 5200w / 4472 Frigorias',nmv:4.7,nsi:5,sh:4.1},{id:'MLA1977827696',t:'Heladera Philco One Door Cíclica Con Dispenser 161l Plata- Phsd179pd2 Gris',nmv:4.65,nsi:11,sh:4.06},{id:'MLA3683019722',t:'Aire Acondicionado Split Inverter Sansei Frio Calor 3225 Frigorias / 3750 W Blanco',nmv:2.93,nsi:4,sh:2.56},{id:'MLA2134172310',t:'Notebook Asus Vivobook Go 15 15.6  X1504za Intel Core I7-1255u 16gb 512gb 60hz Windows 11 Color Azul Quiet Blue',nmv:2.62,nsi:2,sh:2.28},{id:'MLA1496298109',t:'Campana Aspirante Siam Csi-ca060x 3 Velocidades Color Plateado Plateado',nmv:2.56,nsi:15,sh:2.24},{id:'MLA1458328215',t:'Heladera Philco One Door Cíclica Con Dispenser 161l Plata- Phsd179pd2 Gris',nmv:2.42,nsi:5,sh:2.12}],
-    cats_mom:[{c:'ACC MOTORCYCLES',nmv:0.01,nsi:1,mla_nmv:201.55,mla_nsi:3690,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'ACC TOOLS',nmv:0.26,nsi:4,mla_nmv:68.67,mla_nsi:967,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'APPAREL ACCESSORIES',nmv:0.01,nsi:1,mla_nmv:256.34,mla_nsi:7744,nmv_p:0.03,nsi_p:3,mla_nmv_p:154.88,mla_nsi_p:4633},{c:'AUDIO & GENERAL ELECTRONICS',nmv:1.98,nsi:12,mla_nmv:191.3,mla_nsi:4350,nmv_p:1.96,nsi_p:14,mla_nmv_p:122.58,mla_nsi_p:2408},{c:'BABY',nmv:0.02,nsi:2,mla_nmv:126.7,mla_nsi:2549,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'BEAUTY ELECTRONICS',nmv:0.25,nsi:5,mla_nmv:148.26,mla_nsi:2433,nmv_p:1.15,nsi_p:8,mla_nmv_p:112.64,mla_nsi_p:1564},{c:'CAMERAS & DRONES',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.11,nsi_p:1,mla_nmv_p:62.5,mla_nsi_p:780},{c:'COMPUTERS & NOTEBOOKS',nmv:16.07,nsi:19,mla_nmv:521.75,mla_nsi:482,nmv_p:2.89,nsi_p:8,mla_nmv_p:222.88,mla_nsi_p:210},{c:'CONSTRUCTION',nmv:1.1,nsi:2,mla_nmv:828.43,mla_nsi:18022,nmv_p:0.04,nsi_p:1,mla_nmv_p:464.67,mla_nsi_p:10024},{c:'CPG PERSONAL CARE',nmv:0.76,nsi:96,mla_nmv:107.63,mla_nsi:6847,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'CYCLING AND OTHERS',nmv:0.57,nsi:16,mla_nmv:181.58,mla_nsi:2567,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'FRAGRANCES',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.05,nsi_p:1,mla_nmv_p:157.08,mla_nsi_p:2233},{c:'FURNITURE',nmv:1.01,nsi:14,mla_nmv:552.49,mla_nsi:5745,nmv_p:0.88,nsi_p:10,mla_nmv_p:312.43,mla_nsi_p:3259},{c:'HAIR',nmv:0.06,nsi:8,mla_nmv:105.16,mla_nsi:4412,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'HEALTH GOODS',nmv:0.06,nsi:3,mla_nmv:292.49,mla_nsi:9037,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'HEATING, COOLING & AIR QUALITY',nmv:9.58,nsi:14,mla_nmv:441.01,mla_nsi:1260,nmv_p:4.5,nsi_p:8,mla_nmv_p:189.92,mla_nsi_p:911},{c:'HOME OUTDOORS',nmv:0.55,nsi:3,mla_nmv:188.87,mla_nsi:4400,nmv_p:1.02,nsi_p:6,mla_nmv_p:72.12,mla_nsi_p:1773},{c:'HOUSEHOLD ITEMS',nmv:0.89,nsi:42,mla_nmv:592.16,mla_nsi:21200,nmv_p:0.17,nsi_p:11,mla_nmv_p:365.02,mla_nsi_p:12061},{c:'INDOOR SPORTS',nmv:0.37,nsi:19,mla_nmv:193.09,mla_nsi:4361,nmv_p:0.12,nsi_p:3,mla_nmv_p:142.65,mla_nsi_p:2232},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:2.06,nsi:14,mla_nmv:473.58,mla_nsi:7217,nmv_p:1.16,nsi_p:8,mla_nmv_p:237.55,mla_nsi_p:3841},{c:'LARGE APPLIANCES',nmv:30.1,nsi:66,mla_nmv:532.33,mla_nsi:1341,nmv_p:21.94,nsi_p:49,mla_nmv_p:267.52,mla_nsi_p:731},{c:'LIGHTING',nmv:0.02,nsi:1,mla_nmv:188.92,mla_nsi:7522,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'MATTRESSES & SOMMIER',nmv:2.5,nsi:11,mla_nmv:221.85,mla_nsi:606,nmv_p:1.19,nsi_p:4,mla_nmv_p:97.87,mla_nsi_p:268},{c:'MOUNTAIN & OUTDOORS',nmv:0.79,nsi:30,mla_nmv:152.81,mla_nsi:3734,nmv_p:0.58,nsi_p:27,mla_nmv_p:92.97,mla_nsi_p:2162},{c:'OTHER MAINSTREAM SPORTS',nmv:0.1,nsi:4,mla_nmv:60.72,mla_nsi:872,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'OTHER SPORTS',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.13,nsi_p:2,mla_nmv_p:51.23,mla_nsi_p:660},{c:'PET',nmv:0.6,nsi:10,mla_nmv:283.02,mla_nsi:6649,nmv_p:0.47,nsi_p:14,mla_nmv_p:213.9,mla_nsi_p:5010},{c:'SECURITY',nmv:0.38,nsi:9,mla_nmv:154.43,mla_nsi:2651,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'SMALL APPLIANCES',nmv:8.51,nsi:91,mla_nmv:589.47,mla_nsi:6232,nmv_p:3.84,nsi_p:93,mla_nmv_p:299.22,mla_nsi_p:3034},{c:'SMARTPHONES & TABLETS',nmv:9.37,nsi:34,mla_nmv:912.76,mla_nsi:6306,nmv_p:4.12,nsi_p:18,mla_nmv_p:555.57,mla_nsi_p:3605},{c:'SPORTS ACCESSORIES',nmv:0.06,nsi:1,mla_nmv:10.48,mla_nsi:244,nmv_p:0.09,nsi_p:1,mla_nmv_p:7.11,mla_nsi_p:190},{c:'STATIONERY',nmv:0.02,nsi:1,mla_nmv:182.91,mla_nsi:10551,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'TELEVISIONS & STREAMING DEVICES',nmv:25.47,nsi:46,mla_nmv:361.23,mla_nsi:1921,nmv_p:20.63,nsi_p:46,mla_nmv_p:168.51,mla_nsi_p:1112},{c:'TOOLS',nmv:0.65,nsi:10,mla_nmv:969.92,mla_nsi:15260,nmv_p:0.85,nsi_p:17,mla_nmv_p:506.91,mla_nsi_p:7758},{c:'TOYS AND GAMES',nmv:0.05,nsi:2,mla_nmv:230.98,mla_nsi:6081,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'WATER SPORTS',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.07,nsi_p:3,mla_nmv_p:5.99,mla_nsi_p:191},{c:'WEARABLES',nmv:0.4,nsi:12,mla_nmv:233.02,mla_nsi:3629,nmv_p:0.38,nsi_p:9,mla_nmv_p:126.56,mla_nsi_p:1926}],
-    ce_cats_mom:[{c:'AUDIO & GENERAL ELECTRONICS',nmv:191.3,nsi:4350,nmv_p:122.58,nsi_p:2408},{c:'CAMERAS & DRONES',nmv:108.64,nsi:1030,nmv_p:62.5,nsi_p:780},{c:'COMPUTERS & NOTEBOOKS',nmv:521.75,nsi:482,nmv_p:222.88,nsi_p:210},{c:'CONSOLE GAMING HARDWARE',nmv:177.14,nsi:870,nmv_p:167.19,nsi_p:991},{c:'GAMES, DIGITAL GOODS & SOFTWARE',nmv:15.14,nsi:230,nmv_p:14.36,nsi_p:226},{c:'HEATING, COOLING & AIR QUALITY',nmv:441.01,nsi:1260,nmv_p:189.92,nsi_p:911},{c:'HOUSEHOLD APPLIANCES PARTS',nmv:63.69,nsi:2137,nmv_p:42.52,nsi_p:1395},{c:'IT APPLIANCES',nmv:280.73,nsi:3971,nmv_p:121.73,nsi_p:1730},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:473.58,nsi:7217,nmv_p:237.55,nsi_p:3841},{c:'LARGE APPLIANCES',nmv:532.33,nsi:1341,nmv_p:267.52,nsi_p:731},{c:'SMALL APPLIANCES',nmv:589.47,nsi:6232,nmv_p:299.22,nsi_p:3034},{c:'SMARTPHONES & TABLETS',nmv:912.76,nsi:6306,nmv_p:555.57,nsi_p:3605},{c:'TELEVISIONS & STREAMING DEVICES',nmv:361.23,nsi:1921,nmv_p:168.51,nsi_p:1112},{c:'WEARABLES',nmv:233.02,nsi:3629,nmv_p:126.56,nsi_p:1926}],
-    ce:{site:{nmv:4.902,nsi:41000},ns:{nmv:103.53,nsi:308},yoy:{snmv:28.5,snsi:6.8,nnmv:-47.2,nnsi:-57.2,partial:true},mom:{snmv:88.6,snsi:79.0,nnmv:68.3,nnsi:21.3,ref:'vs 8/8/2026'},da:{snmv:29.9,snsi:12.6,nnmv:35.2,nnsi:37.2,ref:'vs 08/09/2026'},sa:{snmv:39.7,snsi:21.7,nnmv:68.2,nnsi:77.0,ref:'vs 02/09/2026'}},
-    he:{site:{nmv:2.179,nsi:17200},ns:{nmv:75.64,nsi:229},yoy:{snmv:10.7,snsi:-1.1,nnmv:-60.1,nnsi:-66.7,partial:true},mom:{snmv:99.9,snsi:79.2,nnmv:43.1,nnsi:9.0,ref:'vs 8/8/2026'},da:{snmv:29.2,snsi:13.2,nnmv:39.4,nnsi:49.3,ref:'vs 08/09/2026'},sa:{snmv:45.9,snsi:26.5,nnmv:50.9,nnsi:74.9,ref:'vs 02/09/2026'}},
-    tech:{site:{nmv:2.723,nsi:23700},ns:{nmv:27.89,nsi:79},yoy:{snmv:47.4,snsi:12.9,nnmv:312.0,nnsi:146.9,partial:true},mom:{snmv:80.6,snsi:78.2,nnmv:222.4,nnsi:79.5,ref:'vs 8/8/2026'},da:{snmv:30.4,snsi:11.3,nnmv:25.2,nnsi:11.1,ref:'vs 08/09/2026'},sa:{snmv:35.0,snsi:17.9,nnmv:143.6,nnsi:83.3,ref:'vs 02/09/2026'}},
+    cats_mom:[{c:'ACC MOTORCYCLES',nmv:0.01,nsi:1,mla_nmv:201.55,mla_nsi:3690,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'ACC TOOLS',nmv:0.26,nsi:4,mla_nmv:68.67,mla_nsi:967,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'APPAREL ACCESSORIES',nmv:0.01,nsi:1,mla_nmv:256.34,mla_nsi:7744,nmv_p:0.36,nsi_p:11,mla_nmv_p:192.01,mla_nsi_p:5459},{c:'AUDIO & GENERAL ELECTRONICS',nmv:1.98,nsi:12,mla_nmv:191.3,mla_nsi:4350,nmv_p:2.22,nsi_p:15,mla_nmv_p:146.48,mla_nsi_p:2896},{c:'BABY',nmv:0.02,nsi:2,mla_nmv:126.7,mla_nsi:2549,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'BEAUTY ELECTRONICS',nmv:0.25,nsi:5,mla_nmv:148.26,mla_nsi:2433,nmv_p:1.26,nsi_p:10,mla_nmv_p:138.74,mla_nsi_p:1908},{c:'CAMERAS & DRONES',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.11,nsi_p:1,mla_nmv_p:75.74,mla_nsi_p:921},{c:'COMPUTERS & NOTEBOOKS',nmv:16.07,nsi:19,mla_nmv:521.75,mla_nsi:482,nmv_p:3.57,nsi_p:10,mla_nmv_p:260.98,mla_nsi_p:249},{c:'CONSTRUCTION',nmv:1.1,nsi:2,mla_nmv:828.43,mla_nsi:18022,nmv_p:0.04,nsi_p:1,mla_nmv_p:569.46,mla_nsi_p:12137},{c:'CPG PERSONAL CARE',nmv:0.76,nsi:96,mla_nmv:107.63,mla_nsi:6847,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'CYCLING AND OTHERS',nmv:0.57,nsi:16,mla_nmv:181.58,mla_nsi:2567,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'FRAGRANCES',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.05,nsi_p:1,mla_nmv_p:186.79,mla_nsi_p:2677},{c:'FURNITURE',nmv:1.01,nsi:14,mla_nmv:552.49,mla_nsi:5745,nmv_p:1.11,nsi_p:13,mla_nmv_p:396.82,mla_nsi_p:4040},{c:'HAIR',nmv:0.06,nsi:8,mla_nmv:105.16,mla_nsi:4412,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'HEALTH GOODS',nmv:0.06,nsi:3,mla_nmv:292.49,mla_nsi:9037,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'HEATING, COOLING & AIR QUALITY',nmv:9.58,nsi:14,mla_nmv:441.01,mla_nsi:1260,nmv_p:5.75,nsi_p:9,mla_nmv_p:239,mla_nsi_p:1119},{c:'HOME OUTDOORS',nmv:0.55,nsi:3,mla_nmv:188.87,mla_nsi:4400,nmv_p:1.02,nsi_p:6,mla_nmv_p:89.67,mla_nsi_p:2180},{c:'HOUSEHOLD ITEMS',nmv:0.89,nsi:42,mla_nmv:592.16,mla_nsi:21200,nmv_p:0.22,nsi_p:15,mla_nmv_p:450.53,mla_nsi_p:14608},{c:'INDOOR SPORTS',nmv:0.37,nsi:19,mla_nmv:193.09,mla_nsi:4361,nmv_p:0.12,nsi_p:3,mla_nmv_p:169.99,mla_nsi_p:2694},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:2.06,nsi:14,mla_nmv:473.58,mla_nsi:7217,nmv_p:1.47,nsi_p:10,mla_nmv_p:295.09,mla_nsi_p:4737},{c:'LARGE APPLIANCES',nmv:30.1,nsi:66,mla_nmv:532.33,mla_nsi:1341,nmv_p:24.66,nsi_p:56,mla_nmv_p:345.43,mla_nsi_p:916},{c:'LIGHTING',nmv:0.02,nsi:1,mla_nmv:188.92,mla_nsi:7522,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'MATTRESSES & SOMMIER',nmv:2.5,nsi:11,mla_nmv:221.85,mla_nsi:606,nmv_p:2.31,nsi_p:9,mla_nmv_p:123.94,mla_nsi_p:336},{c:'MOUNTAIN & OUTDOORS',nmv:0.79,nsi:30,mla_nmv:152.81,mla_nsi:3734,nmv_p:0.71,nsi_p:32,mla_nmv_p:115.58,mla_nsi_p:2628},{c:'OTHER MAINSTREAM SPORTS',nmv:0.1,nsi:4,mla_nmv:60.72,mla_nsi:872,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'OTHER SPORTS',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.13,nsi_p:2,mla_nmv_p:62,mla_nsi_p:796},{c:'PET',nmv:0.6,nsi:10,mla_nmv:283.02,mla_nsi:6649,nmv_p:0.62,nsi_p:16,mla_nmv_p:262.62,mla_nsi_p:6122},{c:'SECURITY',nmv:0.38,nsi:9,mla_nmv:154.43,mla_nsi:2651,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'SMALL APPLIANCES',nmv:8.51,nsi:91,mla_nmv:589.47,mla_nsi:6232,nmv_p:4.04,nsi_p:101,mla_nmv_p:372.3,mla_nsi_p:3775},{c:'SMARTPHONES & TABLETS',nmv:9.37,nsi:34,mla_nmv:912.76,mla_nsi:6306,nmv_p:4.87,nsi_p:21,mla_nmv_p:681.06,mla_nsi_p:4286},{c:'SPORTS ACCESSORIES',nmv:0.06,nsi:1,mla_nmv:10.48,mla_nsi:244,nmv_p:0.09,nsi_p:1,mla_nmv_p:8.01,mla_nsi_p:218},{c:'STATIONERY',nmv:0.02,nsi:1,mla_nmv:182.91,mla_nsi:10551,nmv_p:0,nsi_p:0,mla_nmv_p:0,mla_nsi_p:0},{c:'TELEVISIONS & STREAMING DEVICES',nmv:25.47,nsi:46,mla_nmv:361.23,mla_nsi:1921,nmv_p:26.36,nsi_p:57,mla_nmv_p:209.87,mla_nsi_p:1358},{c:'TOOLS',nmv:0.65,nsi:10,mla_nmv:969.92,mla_nsi:15260,nmv_p:1.04,nsi_p:22,mla_nmv_p:602.97,mla_nsi_p:9305},{c:'TOYS AND GAMES',nmv:0.05,nsi:2,mla_nmv:230.98,mla_nsi:6081,nmv_p:0.52,nsi_p:1,mla_nmv_p:600.87,mla_nsi_p:13812},{c:'WATER SPORTS',nmv:0,nsi:0,mla_nmv:0,mla_nsi:0,nmv_p:0.07,nsi_p:3,mla_nmv_p:7.23,mla_nsi_p:230},{c:'WEARABLES',nmv:0.4,nsi:12,mla_nmv:233.02,mla_nsi:3629,nmv_p:0.38,nsi_p:9,mla_nmv_p:155.05,mla_nsi_p:2383}],
+    ce_cats_mom:[{c:'AUDIO & GENERAL ELECTRONICS',nmv:191.3,nsi:4350,nmv_p:146.48,nsi_p:2896},{c:'CAMERAS & DRONES',nmv:108.64,nsi:1030,nmv_p:75.74,nsi_p:921},{c:'COMPUTERS & NOTEBOOKS',nmv:521.75,nsi:482,nmv_p:260.98,nsi_p:249},{c:'CONSOLE GAMING HARDWARE',nmv:177.14,nsi:870,nmv_p:199.92,nsi_p:1226},{c:'GAMES, DIGITAL GOODS & SOFTWARE',nmv:15.14,nsi:230,nmv_p:18.17,nsi_p:275},{c:'HEATING, COOLING & AIR QUALITY',nmv:441.01,nsi:1260,nmv_p:239,nsi_p:1119},{c:'HOUSEHOLD APPLIANCES PARTS',nmv:63.69,nsi:2137,nmv_p:52.52,nsi_p:1716},{c:'IT APPLIANCES',nmv:280.73,nsi:3971,nmv_p:156.27,nsi_p:2161},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:473.58,nsi:7217,nmv_p:295.09,nsi_p:4737},{c:'LARGE APPLIANCES',nmv:532.33,nsi:1341,nmv_p:345.43,nsi_p:916},{c:'SMALL APPLIANCES',nmv:589.47,nsi:6232,nmv_p:372.3,nsi_p:3775},{c:'SMARTPHONES & TABLETS',nmv:912.76,nsi:6306,nmv_p:681.06,nsi_p:4286},{c:'TELEVISIONS & STREAMING DEVICES',nmv:361.23,nsi:1921,nmv_p:209.87,nsi_p:1358},{c:'WEARABLES',nmv:233.02,nsi:3629,nmv_p:155.05,nsi_p:2383}],
+    ce:{site:{nmv:4.902,nsi:41000},ns:{nmv:103.53,nsi:308},yoy:{snmv:8.6,snsi:-9.7,nnmv:-55.3,nnsi:-63.6,partial:true},mom:{snmv:52.8,snsi:46.4,nnmv:41.0,nnsi:6.6,ref:'vs 8/8/2026'},da:{snmv:7.7,snsi:-5.5,nnmv:5.3,nnsi:6.4,ref:'vs 08/09/2026'},sa:{snmv:16.7,snsi:3.3,nnmv:47.8,nnsi:50.2,ref:'vs 02/09/2026'}},
+    he:{site:{nmv:2.179,nsi:17200},ns:{nmv:75.64,nsi:229},yoy:{snmv:-7.2,snsi:-16.5,nnmv:-66.3,nnsi:-71.7,partial:true},mom:{snmv:59.5,snsi:45.8,nnmv:20.0,nnsi:-3.8,ref:'vs 8/8/2026'},da:{snmv:7.6,snsi:-4.4,nnmv:5.7,nnsi:11.4,ref:'vs 08/09/2026'},sa:{snmv:22.3,snsi:8.2,nnmv:34.7,nnsi:49.8,ref:'vs 02/09/2026'}},
+    tech:{site:{nmv:2.723,nsi:23700},ns:{nmv:27.89,nsi:79},yoy:{snmv:25.7,snsi:-4.4,nnmv:273.4,nnsi:119.4,partial:true},mom:{snmv:47.8,snsi:46.3,nnmv:168.2,nnsi:54.9,ref:'vs 8/8/2026'},da:{snmv:7.7,snsi:-6.7,nnmv:4.2,nnsi:-5.9,ref:'vs 08/09/2026'},sa:{snmv:12.6,snsi:-0.4,nnmv:101.1,nnsi:51.6,ref:'vs 02/09/2026'}},
     bpc:{hora:10,brands:[{b:'Philco',total:28,exp:4,near:11,cheap:13,pct_exp:14.3,pct_cheap:46.4,avg_gap:-6.7,avg_gap_exp:'19.8',vs:'Coto,Frávega,Megatone'},{b:'Proline',total:25,exp:12,near:2,cheap:11,pct_exp:48.0,pct_cheap:44.0,avg_gap:10,avg_gap_exp:'42.5',vs:'Aliexpress Argentina,Frávega,Megatone'},{b:'Sansei',total:18,exp:4,near:5,cheap:9,pct_exp:22.2,pct_cheap:50.0,avg_gap:-4.1,avg_gap_exp:'28.4',vs:'Frávega'},{b:'Atma',total:17,exp:4,near:7,cheap:6,pct_exp:23.5,pct_cheap:35.3,avg_gap:-4.8,avg_gap_exp:'14.2',vs:'Coto,Easy Argentina,Frávega,Megatone'},{b:'Noblex',total:10,exp:3,near:5,cheap:2,pct_exp:30.0,pct_cheap:20.0,avg_gap:-0.7,avg_gap_exp:'20.2',vs:'Carrefour Argentina,Frávega,Megatone,Oncity'},{b:'Siam',total:9,exp:1,near:3,cheap:5,pct_exp:11.1,pct_cheap:55.6,avg_gap:-9.2,avg_gap_exp:'13.7',vs:'Frávega,Megatone'}],top_exp:[{b:'Proline',t:'Cama Perros Elevada Reforzada Proline Mascotas Xl Gris Liso',v:'PET',gap:68.5,meli:79199,rival:46999,rv:'Frávega'},{b:'Proline',t:'Manta De Estimulación Para Gatos Proline',v:'PET',gap:67.6,meli:35199,rival:20999,rv:'Frávega'},{b:'Proline',t:'(sin título)',v:'PET',gap:65,meli:39599,rival:23998,rv:'Frávega'},{b:'Sansei',t:'Anafe Sansei Electrico 1 Hornalla 500 W',v:'MOUNTAIN & OUTDOORS',gap:51.9,meli:31899,rival:20999,rv:'Frávega'},{b:'Sansei',t:'(sin título)',v:'HOUSEHOLD APPLIANCES PARTS',gap:50,meli:89999,rival:59999,rv:'Frávega'},{b:'Proline',t:'Arnés Petral Correa anti tirones Pechera Regulable Para Perros Bordo Proline Talle M',v:'PET',gap:50,meli:20999,rival:13999,rv:'Frávega'},{b:'Noblex',t:'Noblex B30 Dual SIM 128 GB Negro 6 GB RAM',v:'SMARTPHONES & TABLETS',gap:46.6,meli:344499,rival:234999,rv:'Frávega'},{b:'Proline',t:'Correa Manos Libres Para Perros 2,30 M Proline',v:'PET',gap:44.4,meli:12999,rival:8999,rv:'Frávega'},{b:'Proline',t:'Arnés Petral Correa anti tirones Pechera Regulable Para Perros Bordo Proline Talle L',v:'PET',gap:42.9,meli:19999,rival:13999,rv:'Frávega'},{b:'Proline',t:'Cama Mascotas Proline Cycpr303pi Moisés S Gris Gris',v:'PET',gap:40.8,meli:35199,rival:24999,rv:'Frávega'},{b:'Proline',t:'Rascador Para Gatos Con Diseño De Árbol Proline',v:'PET',gap:40,meli:30799,rival:21999,rv:'Frávega'},{b:'Proline',t:'Rascador Interactivopara Gatos Proline',v:'PET',gap:38.6,meli:69299,rival:49999,rv:'Frávega'},{b:'Proline',t:'Contenedor Hermetico Alimento De Mascotas Proline Plegable Ruedas 19 Litros Liso Gris',v:'PET',gap:35.7,meli:37999,rival:27999,rv:'Frávega'},{b:'Philco',t:'Oxímetro Digital Philco A340 Frecuencia Cardíaca Display OLED',v:'HEALTH GOODS',gap:32.6,meli:56999,rival:42999,rv:'Frávega'},{b:'Philco',t:'Pileta Estructural Redonda Plus Philco Patrón Ratán 6765 L',v:'HOME OUTDOORS',gap:28.1,meli:407399,rival:317999,rv:'Megatone'},{b:'Atma',t:'Perchero Industrial Atma Home Con Estante - Negro',v:'FURNITURE',gap:21,meli:48399,rival:39998,rv:'Frávega'},{b:'Atma',t:'Horno Grill Eléctrico Atma Hgab4523pi 45l 1400w Negro',v:'LARGE APPLIANCES',gap:18.9,meli:219999,rival:184999,rv:'Frávega'},{b:'Siam',t:'Lavavajillas Siam 15 Cubiertos Acero Inoxidable - Lsi-lj15x',v:'LARGE APPLIANCES',gap:13.7,meli:879999,rival:773999,rv:'Frávega'},{b:'Atma',t:'Secador De Pelo Style Atma Sp8925p 1300w. 2 Velocidades Color Negro',v:'BEAUTY ELECTRONICS',gap:11.2,meli:37999,rival:34170,rv:'Frávega'},{b:'Philco',t:'Fábrica De Hielo Philco Imb23php 2 Medidas Color Negro',v:'SMALL APPLIANCES',gap:10,meli:252999,rival:229999,rv:'Frávega'},{b:'Proline',t:'Abrigo Con Aislante Térmico Proline Para Perros Talle S Gris Oscuro',v:'PET',gap:9.1,meli:11999,rival:10999,rv:'Frávega'},{b:'Philco',t:'Vaso Térmico Con Sorbete Philco Vt500php 500ml De Acero Inoxidable Tapa Y Sistema Antigoteo',v:'MOUNTAIN & OUTDOORS',gap:8.7,meli:24999,rival:22998,rv:'Frávega'},{b:'Noblex',t:'Auriculares Inalámbricos Noblex Hp350btw Bluetooth 5.0 Blanco',v:'WEARABLES',gap:7.9,meli:40999,rival:37999,rv:'Oncity'},{b:'Proline',t:'Alfombra Proline Mascotas Atrapa Piedritas',v:'PET',gap:7.1,meli:14999,rival:13999,rv:'Frávega'},{b:'Sansei',t:'Smartwatch Sansei S20swb Reloj Bluetooth Multifunción Cuadrado 1.83\'',v:'WEARABLES',gap:6.6,meli:34099,rival:31999,rv:'Frávega'},{b:'Noblex',t:'Parlante Portatil Noblex Psb2000p Bluetooth Luces Rgb',v:'AUDIO & GENERAL ELECTRONICS',gap:6.1,meli:138999,rival:130999,rv:'Carrefour Argentina'},{b:'Atma',t:'Tostadora Spider-man Atma Marvel',v:'SMALL APPLIANCES',gap:5.7,meli:55999,rival:52999,rv:'Coto'},{b:'Sansei',t:'Parlante Portátil Sansei Bluetooth Slk20 10w',v:'AUDIO & GENERAL ELECTRONICS',gap:5,meli:20999,rival:19998,rv:'Frávega'}]}
   }
 ];
@@ -732,27 +735,30 @@ function filterBPC(v){
 
 const LABELS=['1/1','2/2','3/3','4/4','5/5','6/6','7/7','8/8','9/9⚡']; /*%%LABELS%%*/
 const NMV_26=[25.396,61.89,61.493,36.292,59.124,43.312,53.289,47.215,16.015]; /*%%NMV_26%%*/
-const NMV_25=[15.348,22.083,24.153,33.458,36.343,35.598,45.213,37.697,12.27]; /*%%NMV_25%%*/
+const NMV_25=[15.348,22.083,24.153,33.458,36.343,35.598,45.213,37.697,14.414]; /*%%NMV_25%%*/
 const NSI_26=[517.1,1277.9,1271.6,743.5,1195.4,838.3,1059.9,916.5,324.4]; /*%%NSI_26%%*/
-const NSI_25=[368.2,552.1,599.1,763.7,883.2,808.9,1057.9,894.6,278.7]; /*%%NSI_25%%*/
+const NSI_25=[368.2,552.1,599.1,763.7,883.2,808.9,1057.9,894.6,325.3]; /*%%NSI_25%%*/
 const PART=[1.381,0.835,1.034,1.27,0.957,0.899,0.97,0.692,0.716]; /*%%PART%%*/
 const PART_NSI=[0.322,0.206,0.224,0.319,0.18,0.206,0.148,0.154,0.186]; /*%%PART_NSI%%*/
+const VISITS_26=[0,0,0,0,0,0,0,0,13.169]; /*%%VISITS_26%%*/
+const VISITS_25=[0,0,0,0,0,0,0,0,9.755]; /*%%VISITS_25%%*/
+const VISITS_PART=[0,0,0,0,0,0,0,0,0.239]; /*%%VISITS_PART%%*/
 const CE_NMV_26=[7.579,18.987,20.033,11.394,18.419,14.114,16.758,13.532,4.902];
-const CE_NMV_25=[4.363,6.625,7.151,10.564,10.243,10.634,13.118,10.534,3.816];
+const CE_NMV_25=[4.363,6.625,7.151,10.564,10.243,10.634,13.118,10.534,4.512];
 const CE_NSI_26=[62.1,154.9,162.0,88.0,150.5,98.3,131.8,104.6,41.0];
-const CE_NSI_25=[45.0,61.0,71.2,104.3,117.8,108.4,141.2,108.6,38.4];
+const CE_NSI_25=[45.0,61.0,71.2,104.3,117.8,108.4,141.2,108.6,45.4];
 const CE_PART=[3.733,2.22,2.778,3.489,2.789,2.457,2.912,2.163,2.112];
 const CE_PART_NSI=[1.697,0.84,1.051,1.826,0.902,0.911,0.772,0.904,0.751];
 const HE_NMV_26=[3.682,8.322,8.032,5.334,8.272,6.946,8.462,5.735,2.179];
-const HE_NMV_25=[1.977,3.107,3.155,4.685,3.887,4.377,5.902,4.016,1.969];
+const HE_NMV_25=[1.977,3.107,3.155,4.685,3.887,4.377,5.902,4.016,2.347];
 const HE_NSI_26=[28.1,66.4,67.2,39.1,65.3,46.2,63.6,43.2,17.2];
-const HE_NSI_25=[18.9,26.6,28.8,42.2,43.2,43.3,57.9,39.5,17.4];
+const HE_NSI_25=[18.9,26.6,28.8,42.2,43.2,43.3,57.9,39.5,20.6];
 const HE_PART=[7.64,4.943,6.759,7.296,6.105,4.609,5.252,4.528,3.471];
 const HE_PART_NSI=[3.719,1.857,2.394,4.0,2.008,1.771,1.373,1.822,1.331];
 const TECH_NMV_26=[3.897,10.665,12.001,6.06,10.147,7.169,8.297,7.797,2.723];
-const TECH_NMV_25=[2.386,3.518,3.996,5.879,6.356,6.257,7.216,6.517,1.847];
+const TECH_NMV_25=[2.386,3.518,3.996,5.879,6.356,6.257,7.216,6.517,2.166];
 const TECH_NSI_26=[34.0,88.5,94.8,48.9,85.2,52.1,68.1,61.4,23.7];
-const TECH_NSI_25=[26.1,34.4,42.4,62.1,74.6,65.1,83.3,69.1,21.0];
+const TECH_NSI_25=[26.1,34.4,42.4,62.1,74.6,65.1,83.3,69.1,24.8];
 const TECH_PART=[0.041,0.096,0.113,0.138,0.086,0.372,0.524,0.422,1.024];
 const TECH_PART_NSI=[0.026,0.077,0.099,0.088,0.054,0.15,0.211,0.259,0.333];
 const DEFL_YOY = 1.324; // BM3 abr-26 — acum. jul-25→jun-26 = 32.4%
@@ -774,6 +780,7 @@ function itemUrl(id){return`https://articulo.mercadolibre.com.ar/${id.replace('M
 function cmpCard(title,metric,deflator){
   const p=metric.partial||false;
   const gNsi=(metric.snsi!=null&&metric.nnsi!=null)?(metric.nnsi-metric.snsi):null;
+  const gVis=(metric.svis!=null&&metric.nvis!=null)?(metric.nvis-metric.svis):null;
   const ppFmt=(v,par)=>v==null?'—':((v>=0?'+':'')+v.toFixed(1)+' pp'+(par?'<span class="partial-mark">*</span>':''));
   const dSnmv=deflator&&metric.snmv!=null?((1+metric.snmv/100)/deflator-1)*100:metric.snmv;
   const dNnmv=deflator&&metric.nnmv!=null?((1+metric.nnmv/100)/deflator-1)*100:metric.nnmv;
@@ -784,10 +791,13 @@ function cmpCard(title,metric,deflator){
 <div class="cmp-ref">${metric.ref||''}</div>
 <div class="cmp-row"><span class="cmp-lbl">Site NMV${nmvLbl?' <span style="font-size:9px;background:var(--blue);color:#fff;padding:1px 4px;border-radius:2px;font-weight:700">'+nmvLbl+'</span>':''}</span><span class="cmp-v ${cls(dSnmv,p)}">${pct(dSnmv,p)}</span></div>
 <div class="cmp-row"><span class="cmp-lbl">Site NSI</span><span class="cmp-v ${cls(metric.snsi,p)}">${pct(metric.snsi,p)}</span></div>
+<div class="cmp-row"><span class="cmp-lbl">Site Visitas</span><span class="cmp-v ${cls(metric.svis,p)}">${pct(metric.svis,p)}</span></div>
 <div class="cmp-row"><span class="cmp-lbl">Newsan NMV${nmvLbl?' <span style="font-size:9px;background:var(--blue);color:#fff;padding:1px 4px;border-radius:2px;font-weight:700">'+nmvLbl+'</span>':''}</span><span class="cmp-v ${cls(dNnmv,p)}">${pct(dNnmv,p)}</span></div>
 <div class="cmp-row"><span class="cmp-lbl">Newsan NSI</span><span class="cmp-v ${cls(metric.nnsi,p)}">${pct(metric.nnsi,p&&metric.nnsi!=null&&metric.nnsi<0)}</span></div>
+<div class="cmp-row"><span class="cmp-lbl">Newsan Visitas</span><span class="cmp-v ${cls(metric.nvis,p)}">${pct(metric.nvis,p)}</span></div>
 <div class="cmp-row gap-row"><span class="cmp-lbl gap-lbl">Gap NMV${nmvLbl?' Defla':''} (NS vs MLA)</span><span class="cmp-v ${cls(gNmv,p&&gNmv!=null&&gNmv<0)}">${ppFmt(gNmv,p)}</span></div>
 <div class="cmp-row gap-row" style="margin-top:2px"><span class="cmp-lbl gap-lbl">Gap NSI (NS vs MLA)</span><span class="cmp-v ${cls(gNsi,p&&gNsi!=null&&gNsi<0)}">${ppFmt(gNsi,p)}</span></div>
+<div class="cmp-row gap-row" style="margin-top:2px"><span class="cmp-lbl gap-lbl">Gap Visitas (NS vs MLA)</span><span class="cmp-v ${cls(gVis,p&&gVis!=null&&gVis<0)}">${ppFmt(gVis,p)}</span></div>
 </div>`;
 }
 
@@ -799,7 +809,8 @@ function renderScopeData(d, idx, scope){
   const scopeLabels = {total:'', ce:'CE', he:'HE', tech:'Tech'};
   const scopeLbl = scope!=='total' ? ` <span style="font-size:10px;background:#3483FA;color:#fff;padding:1px 6px;border-radius:3px;margin-left:4px">${scopeLabels[scope]}</span>` : '';
   const cutoffTxt = d.cutoff ? ` Comparaciones cortadas a las ${d.cutoff} hs en ambos días (hora contra hora, no día completo).` : '';
-  const nrtBanner = is_nrt ? `<div class="warn-nrt">⚡ Datos en tiempo real (NRT) — día en curso.${cutoffTxt}</div>` : '';
+  const visCutoffTxt = (d.visits_cutoff && d.visits_cutoff!==d.cutoff) ? ` Visitas tiene rezago de carga: cortada a las ${d.visits_cutoff} hs.` : '';
+  const nrtBanner = is_nrt ? `<div class="warn-nrt">⚡ Datos en tiempo real (NRT) — día en curso.${cutoffTxt}${visCutoffTxt}</div>` : '';
   const asp_ns=(src.ns.nmv*1e6/src.ns.nsi).toFixed(0);
   const part_nmv=(src.ns.nmv/(src.site.nmv*1000)*100).toFixed(3);
   const part_nsi=(src.ns.nsi/src.site.nsi*100).toFixed(3);
@@ -813,10 +824,10 @@ function renderScopeData(d, idx, scope){
   <div class="kpi-card o"><div class="kpi-lbl">Part. NSI</div><div class="kpi-val">${part_nsi}%</div><div class="kpi-sub">${scopeRef}</div></div>
 </div>`;
   const comps=`<div class="cmp-grid">
-  ${cmpCard('YoY — vs mismo día 2025',{snmv:src.yoy.snmv,snsi:src.yoy.snsi,nnmv:src.yoy.nnmv,nnsi:src.yoy.nnsi,partial:src.yoy.partial,ref:'vs '+d.fecha.replace('2026','2025')},DEFL_YOY)}
-  ${cmpCard('MoM — vs fecha doble anterior',{snmv:src.mom.snmv,snsi:src.mom.snsi,nnmv:src.mom.nnmv,nnsi:src.mom.nnsi,partial:src.mom&&src.mom.partial,ref:src.mom.ref})}
-  ${cmpCard('vs Día Anterior',{snmv:src.da.snmv,snsi:src.da.snsi,nnmv:src.da.nnmv,nnsi:src.da.nnsi,partial:src.da&&src.da.partial,ref:src.da.ref})}
-  ${cmpCard('vs Semana Anterior',{snmv:src.sa.snmv,snsi:src.sa.snsi,nnmv:src.sa.nnmv,nnsi:src.sa.nnsi,partial:src.sa&&src.sa.partial,ref:src.sa.ref})}
+  ${cmpCard('YoY — vs mismo día 2025',{snmv:src.yoy.snmv,snsi:src.yoy.snsi,svis:src.yoy.svis,nnmv:src.yoy.nnmv,nnsi:src.yoy.nnsi,nvis:src.yoy.nvis,partial:src.yoy.partial,ref:'vs '+d.fecha.replace('2026','2025')},DEFL_YOY)}
+  ${cmpCard('MoM — vs fecha doble anterior',{snmv:src.mom.snmv,snsi:src.mom.snsi,svis:src.mom.svis,nnmv:src.mom.nnmv,nnsi:src.mom.nnsi,nvis:src.mom.nvis,partial:src.mom&&src.mom.partial,ref:src.mom.ref})}
+  ${cmpCard('vs Día Anterior',{snmv:src.da.snmv,snsi:src.da.snsi,svis:src.da.svis,nnmv:src.da.nnmv,nnsi:src.da.nnsi,nvis:src.da.nvis,partial:src.da&&src.da.partial,ref:src.da.ref})}
+  ${cmpCard('vs Semana Anterior',{snmv:src.sa.snmv,snsi:src.sa.snsi,svis:src.sa.svis,nnmv:src.sa.nnmv,nnsi:src.sa.nnsi,nvis:src.sa.nvis,partial:src.sa&&src.sa.partial,ref:src.sa.ref})}
 </div>`;
   const footnote = is_nrt ? `<div class="footnote">* Valores con corte horario: la fecha de referencia se truncó a las ${d.cutoff||''} hs para igualar el avance del día en curso.</div>` : '';
   return`${nrtBanner}
@@ -884,6 +895,8 @@ function renderSlide(d,idx){
         style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:var(--primary);color:#fff;cursor:pointer">NMV</button>
       <button onclick="switchMetric('nsi',${idx})" id="btn-nsi-${idx}"
         style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:transparent;color:var(--primary);cursor:pointer">NSI</button>
+      <button onclick="switchMetric('visitas',${idx})" id="btn-visitas-${idx}"
+        style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--primary);background:transparent;color:var(--primary);cursor:pointer">Visitas</button>
     </div>
   </div>
   <div class="charts-row">
@@ -944,6 +957,10 @@ document.querySelectorAll('.tab').forEach(tab=>{
 });
 
 function _scopeArrays(metric){
+  if(metric==='visitas'){
+    // Visitas no está desglosada por scope (CE/HE/Tech): siempre Total MLA.
+    return {d26:VISITS_26, d25:VISITS_25, pt:VISITS_PART, lbl:'', maxPt:1, visitsOnly:true};
+  }
   const isNmv = metric==='nmv';
   if(SCOPE==='ce')   return {d26:isNmv?CE_NMV_26:CE_NSI_26,   d25:isNmv?CE_NMV_25:CE_NSI_25,   pt:isNmv?CE_PART:CE_PART_NSI,   lbl:'CE',   maxPt:isNmv?5:2.5};
   if(SCOPE==='he')   return {d26:isNmv?HE_NMV_26:HE_NSI_26,   d25:isNmv?HE_NMV_25:HE_NSI_25,   pt:isNmv?HE_PART:HE_PART_NSI,   lbl:'HE',   maxPt:isNmv?5:2.5};
@@ -954,11 +971,13 @@ function _scopeArrays(metric){
 function buildMainChart(idx, metric){
   const GRID='#EDEEF1',TICK='#9E9E9E',TICK2='#616161';
   const isNmv = metric==='nmv';
+  const isVisitas = metric==='visitas';
   const {d26, d25, lbl} = _scopeArrays(metric);
-  const unit  = isNmv ? ' bn' : 'k';
+  const unit  = isNmv ? ' bn' : (isVisitas ? ' M' : 'k');
   const scope_lbl = lbl ? ` ${lbl}` : '';
-  const lbl26 = isNmv ? `2026${scope_lbl} (bn ARS)` : `2026${scope_lbl} (k unidades)`;
-  const lbl25 = isNmv ? `2025${scope_lbl} (bn ARS)` : `2025${scope_lbl} (k unidades)`;
+  const unitTxt = isNmv ? '(bn ARS)' : (isVisitas ? '(M visitas)' : '(k unidades)');
+  const lbl26 = `2026${scope_lbl} ${unitTxt}`;
+  const lbl25 = `2025${scope_lbl} ${unitTxt}`;
   return {
     type:'bar',
     data:{
@@ -983,7 +1002,8 @@ function buildPartChart(idx, metric){
   const GRID='#EDEEF1',TICK='#9E9E9E',TICK2='#616161';
   const {pt:partData, maxPt:maxVal, lbl:scopeTag} = _scopeArrays(metric);
   const scopeSuffix = scopeTag ? ` ${scopeTag}` : '';
-  const lbl = metric==='nmv' ? `Part. Newsan NMV${scopeSuffix} (%)` : `Part. Newsan NSI${scopeSuffix} (%)`;
+  const lblMap = {nmv:`Part. Newsan NMV${scopeSuffix} (%)`, nsi:`Part. Newsan NSI${scopeSuffix} (%)`, visitas:'Part. Newsan Visitas (%)'};
+  const lbl = lblMap[metric] || lblMap.nmv;
   return {
     type:'line',
     data:{
@@ -1026,13 +1046,18 @@ function switchMetric(metric, idx){
     b.style.background = metric==='nsi'?'var(--primary)':'transparent';
     b.style.color      = metric==='nsi'?'#fff':'var(--primary)';
   });
+  document.querySelectorAll('[id^="btn-visitas-"]').forEach(b=>{
+    b.style.background = metric==='visitas'?'var(--primary)':'transparent';
+    b.style.color      = metric==='visitas'?'#fff':'var(--primary)';
+  });
 
   // Actualizar títulos y charts del tab activo
-  const isNmv = metric==='nmv';
   const ttl = document.getElementById('chart-ttl-'+idx);
   const pttl= document.getElementById('part-ttl-'+idx);
-  if(ttl)  ttl.textContent  = isNmv ? 'Evolución NMV Site — todas las Fechas Dobles (bn ARS)' : 'Evolución NSI Site — todas las Fechas Dobles (k unidades)';
-  if(pttl) pttl.textContent = isNmv ? 'Participación Newsan en NMV (%)' : 'Participación Newsan en NSI (%)';
+  const ttlMap = {nmv:'Evolución NMV Site — todas las Fechas Dobles (bn ARS)', nsi:'Evolución NSI Site — todas las Fechas Dobles (k unidades)', visitas:'Evolución Visitas Site — todas las Fechas Dobles (M visitas)'};
+  const pttlMap = {nmv:'Participación Newsan en NMV (%)', nsi:'Participación Newsan en NSI (%)', visitas:'Participación Newsan en Visitas (%)'};
+  if(ttl)  ttl.textContent  = ttlMap[metric] || ttlMap.nmv;
+  if(pttl) pttl.textContent = pttlMap[metric] || pttlMap.nmv;
 
   // Destruir y recrear los charts del tab activo
   if(charts['n'+idx]){ charts['n'+idx].destroy(); delete charts['n'+idx]; }
@@ -1068,11 +1093,12 @@ function switchScope(scope){
   // Actualizar títulos de charts
   const ttl=document.getElementById('chart-ttl-'+idx);
   const pttl=document.getElementById('part-ttl-'+idx);
-  const isNmv=CHART_METRIC==='nmv';
   const {lbl:scopeTag}=_scopeArrays(CHART_METRIC);
   const suffix=scopeTag?` ${scopeTag}`:'';
-  if(ttl)  ttl.textContent=isNmv?`Evolución NMV${suffix} Site — Fechas Dobles (bn ARS)`:`Evolución NSI${suffix} Site — Fechas Dobles (k unidades)`;
-  if(pttl) pttl.textContent=isNmv?`Participación Newsan NMV${suffix} (%)`:`Participación Newsan NSI${suffix} (%)`;
+  const ttlMap2 = {nmv:`Evolución NMV${suffix} Site — Fechas Dobles (bn ARS)`, nsi:`Evolución NSI${suffix} Site — Fechas Dobles (k unidades)`, visitas:'Evolución Visitas Site — Fechas Dobles (M visitas)'};
+  const pttlMap2 = {nmv:`Participación Newsan NMV${suffix} (%)`, nsi:`Participación Newsan NSI${suffix} (%)`, visitas:'Participación Newsan Visitas (%)'};
+  if(ttl)  ttl.textContent=ttlMap2[CHART_METRIC]||ttlMap2.nmv;
+  if(pttl) pttl.textContent=pttlMap2[CHART_METRIC]||pttlMap2.nmv;
 }
 
 initCharts(0);

@@ -141,9 +141,9 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
   <div class="header-brand">BI Planning MLA · Grupo Newsan · 2026</div>
   <h1 class="header-title">Fechas <span class="acc">Dobles</span> 2026</h1>
   <div class="header-sub">
-    Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07 · 08/08 · 09/09
+    Performance 01/01 · 02/02 · 03/03 · 04/04 · 05/05 · 06/06 · 07/07 · 08/08 · 09/09 · 10/10
     <span class="badge-ts">Fuente: BT_ORDERS_MLA · BT_ORDERS_MLA_NRT</span>
-    <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 11/09 17:08 AR [BATCH]</span> <!--%%LAST_UPDATE%%-->
+    <span class="badge-ts" style="background:rgba(255,255,255,.08)">🕐 Últ. actualización: 13/10 09:58 AR [BATCH]</span> <!--%%LAST_UPDATE%%-->
   </div>
 </header>
 
@@ -158,6 +158,7 @@ td.sh{color:var(--blue);font-weight:700;text-align:right}
     <button class="tab" data-fd="6">7/7</button>
     <button class="tab" data-fd="7">8/8</button>
     <button class="tab" data-fd="8">9/9</button>
+    <button class="tab" data-fd="9">10/10</button>
   </div>
   <div style="display:flex;gap:4px;padding-right:16px;align-items:center">
     <span style="font-size:10px;color:rgba(255,255,255,.45);margin-right:4px;text-transform:uppercase;letter-spacing:.06em">Scope</span>
@@ -505,6 +506,27 @@ const FECHAS=[
     ce:{site:{nmv:22.815,nsi:172100},ns:{nmv:472.21,nsi:1498},yoy:{snmv:36.2,snsi:13.1,nnmv:-51.7,nnsi:-55.4,partial:false},mom:{snmv:68.8,snsi:64.7,nnmv:61.4,nnsi:58.4,ref:'vs 8/8/2026'},da:{snmv:37.8,snsi:20.2,nnmv:45.6,nnsi:66.8,ref:'vs 08/09/2026'},sa:{snmv:53.3,snsi:30.8,nnmv:58.7,nnsi:97.3,ref:'vs 02/09/2026'}},
     he:{site:{nmv:10.827,nsi:77600},ns:{nmv:316.48,nsi:1118},yoy:{snmv:17.9,snsi:7.2,nnmv:-66.1,nnsi:-64.6,partial:false},mom:{snmv:89.0,snsi:80.0,nnmv:21.9,nnsi:42.1,ref:'vs 8/8/2026'},da:{snmv:48.4,snsi:29.5,nnmv:38.6,nnsi:71.1,ref:'vs 08/09/2026'},sa:{snmv:66.4,snsi:44.8,nnmv:35.0,nnsi:95.6,ref:'vs 02/09/2026'}},
     tech:{site:{nmv:11.988,nsi:94400},ns:{nmv:155.73,nsi:379},yoy:{snmv:58.5,snsi:18.3,nnmv:247.8,nnsi:89.0,partial:false},mom:{snmv:54.0,snsi:53.7,nnmv:372.9,nnsi:139.0,ref:'vs 8/8/2026'},da:{snmv:29.5,snsi:13.3,nnmv:62.1,nnsi:55.3,ref:'vs 08/09/2026'},sa:{snmv:43.1,snsi:21.0,nnmv:146.4,nnsi:102.7,ref:'vs 02/09/2026'}}
+  },
+  {
+    fd:'10/10',
+    label:'10 Octubre 2026',
+    fecha:'2026-10-10',
+    nrt:false,
+    cutoff:null,
+    visits_cutoff:null,
+    site:{nmv:45.694,nsi:868600,visits:42794507},
+    ns:{nmv:242.03,nsi:1804,part:0.53,visits:66249,part_visits:0.155},
+    yoy:{snmv:39.2,snsi:17.4,svis:42.4,nnmv:-56.7,nnsi:-35.4,nvis:-66.1,partial:false,ref:'2025-10-10'},
+    mom:{snmv:-39.4,snsi:-37.4,svis:null,nnmv:-56.7,nnsi:-34.5,nvis:null,ref:'vs 9/9/2026',partial:false},
+    da:{snmv:-6.6,snsi:-14.6,svis:1.2,nnmv:29.7,nnsi:35.8,nvis:24.5,ref:'vs 09/10/2026',partial:false},
+    sa:{snmv:22.4,snsi:9.4,svis:null,nnmv:89.9,nnsi:140.7,nvis:null,ref:'vs 03/10/2026',partial:false},
+    cats:[{c:'LARGE APPLIANCES',nmv:51.62,nsi:103,sh:21.33},{c:'TELEVISIONS & STREAMING DEVICES',nmv:43.88,nsi:52,sh:18.13},{c:'HEATING, COOLING & AIR QUALITY',nmv:43.05,nsi:60,sh:17.79},{c:'SMALL APPLIANCES',nmv:21.57,nsi:253,sh:8.91},{c:'MATTRESSES & SOMMIER',nmv:17.96,nsi:79,sh:7.42},{c:'SMARTPHONES & TABLETS',nmv:15.19,nsi:42,sh:6.27},{c:'AUDIO & GENERAL ELECTRONICS',nmv:7.65,nsi:60,sh:3.16},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:7.41,nsi:36,sh:3.06},{c:'MOUNTAIN & OUTDOORS',nmv:6.19,nsi:312,sh:2.56},{c:'HOUSEHOLD ITEMS',nmv:5.42,nsi:381,sh:2.24}],
+    items:[{id:'MLA2642228222',t:'Aire Acondicionado Split Philco Pure Energy Full Inverter 3354 Frig/3900w Frío Calor Con Wifi Diagnostico De Aire Filtro Hepa Función Fresh Air Blanco',nmv:15.73,nsi:17,sh:6.5},{id:'MLA3112006460',t:'Lavarropas Philco 11 Kg Carga Frontal Inverter Slim Fit Blanco',nmv:13.61,nsi:17,sh:5.62},{id:'MLA1972652907',t:'Sansei Inverter Sain37ha2an Corriente Doméstica Blanco',nmv:10.76,nsi:13,sh:4.44},{id:'MLA1602167169',t:'Lavavajillas Philco Phlj14 14 Cubiertos Plateado',nmv:8.18,nsi:11,sh:3.38},{id:'MLA1895850703',t:'Colchón De Espuma En Caja 80x190 Cm 1 Plaza Blanco Atma',nmv:7.66,nsi:42,sh:3.17},{id:'MLA2097691311',t:'Smart Tv Noblex 65 4k Led Vidaa Hdr Altavoces 10w',nmv:7.35,nsi:6,sh:3.04},{id:'MLA1711763943',t:'Smart Tv Noblex 65 4k Led Vidaa Hdr Altavoces 10w',nmv:7.05,nsi:6,sh:2.91},{id:'MLA3623702818',t:'Colchon Atma One 2 Plazas 140x190x20 En Caja I 3 Capas De Espuma Color Blanco',nmv:5.66,nsi:18,sh:2.34},{id:'MLA2004787388',t:'Monitor Noblex 27 Pulgadas Nxsm2700 Led Fhd 1ms 100hz Antireflejo Negro',nmv:5.35,nsi:26,sh:2.21},{id:'MLA3039358086',t:'Smart Tv LG Oled77c5psa Oled Evo Ai C5 77\'\' 4k Ultra Hd Hdr Dolby Vision 120hz Webos 25 G-sync Freesync Hdmi X4 Bluetooth 5.3 Procesador Alpha 9 Ai Gen8',nmv:5.32,nsi:0,sh:2.2}],
+    cats_mom:[{c:'ACC CARS & VANS',nmv:0,nsi:0,mla_nmv:1881.48,mla_nsi:31616,nmv_p:0.05,nsi_p:1,mla_nmv_p:3795.66,mla_nsi_p:54085},{c:'ACC MOTORCYCLES',nmv:0,nsi:0,mla_nmv:585.26,mla_nsi:9827,nmv_p:0.01,nsi_p:1,mla_nmv_p:1001.84,mla_nsi_p:16520},{c:'ACC TOOLS',nmv:0,nsi:0,mla_nmv:138.21,mla_nsi:2013,nmv_p:0.74,nsi_p:10,mla_nmv_p:281.32,mla_nsi_p:3708},{c:'APPAREL ACCESSORIES',nmv:0.2,nsi:16,mla_nmv:954.62,mla_nsi:25582,nmv_p:0.2,nsi_p:12,mla_nmv_p:1143.08,mla_nsi_p:31859},{c:'AUDIO & GENERAL ELECTRONICS',nmv:7.65,nsi:60,mla_nmv:497.15,mla_nsi:9103,nmv_p:13.62,nsi_p:77,mla_nmv_p:955.06,mla_nsi_p:18384},{c:'BABY',nmv:0.2,nsi:22,mla_nmv:383.12,mla_nsi:7095,nmv_p:0.07,nsi_p:6,mla_nmv_p:588.76,mla_nsi_p:10776},{c:'BEAUTY ELECTRONICS',nmv:2.04,nsi:25,mla_nmv:607.27,mla_nsi:8860,nmv_p:2.2,nsi_p:35,mla_nmv_p:735.57,mla_nsi_p:11081},{c:'COMPUTERS & NOTEBOOKS',nmv:1.52,nsi:3,mla_nmv:805.77,mla_nsi:734,nmv_p:100.01,nsi_p:107,mla_nmv_p:2674.67,mla_nsi_p:2343},{c:'CONSTRUCTION',nmv:2.4,nsi:3,mla_nmv:1923.97,mla_nsi:38125,nmv_p:2.95,nsi_p:6,mla_nmv_p:3787.99,mla_nsi_p:75276},{c:'CPG PERSONAL CARE',nmv:0.35,nsi:27,mla_nmv:271.76,mla_nsi:15551,nmv_p:2.89,nsi_p:276,mla_nmv_p:440.57,mla_nsi_p:26741},{c:'CYCLING AND OTHERS',nmv:1.85,nsi:8,mla_nmv:595.73,mla_nsi:6834,nmv_p:2.07,nsi_p:28,mla_nmv_p:1019.5,mla_nsi_p:11934},{c:'DECOR',nmv:1.33,nsi:16,mla_nmv:442.27,mla_nsi:17564,nmv_p:0.03,nsi_p:3,mla_nmv_p:615.98,mla_nsi_p:23639},{c:'FRAGRANCES',nmv:0.06,nsi:1,mla_nmv:921.53,mla_nsi:13185,nmv_p:0,nsi_p:0,mla_nmv_p:865.89,mla_nsi_p:13169},{c:'FURNITURE',nmv:2.69,nsi:32,mla_nmv:1818.44,mla_nsi:16067,nmv_p:5.67,nsi_p:54,mla_nmv_p:2757.84,mla_nsi_p:25557},{c:'HABERDASHERY',nmv:0.06,nsi:3,mla_nmv:84.65,mla_nsi:6784,nmv_p:0.08,nsi_p:7,mla_nmv_p:126.1,mla_nsi_p:10372},{c:'HAIR',nmv:0.08,nsi:9,mla_nmv:333.65,mla_nsi:10880,nmv_p:0.66,nsi_p:81,mla_nmv_p:458.85,mla_nsi_p:17522},{c:'HEALTH GOODS',nmv:0.18,nsi:2,mla_nmv:775.41,mla_nsi:21596,nmv_p:0.27,nsi_p:11,mla_nmv_p:1277.21,mla_nsi_p:37172},{c:'HEATING, COOLING & AIR QUALITY',nmv:43.05,nsi:60,mla_nmv:915.29,mla_nsi:3145,nmv_p:59.23,nsi_p:69,mla_nmv_p:2161.42,mla_nsi_p:5679},{c:'HOME OUTDOORS',nmv:0.59,nsi:9,mla_nmv:547.05,mla_nsi:10420,nmv_p:2.36,nsi_p:14,mla_nmv_p:883.91,mla_nsi_p:17990},{c:'HOUSEHOLD APPLIANCES PARTS',nmv:0.13,nsi:2,mla_nmv:161.8,mla_nsi:5235,nmv_p:0.04,nsi_p:1,mla_nmv_p:300.67,mla_nsi_p:9015},{c:'HOUSEHOLD ITEMS',nmv:5.42,nsi:381,mla_nmv:2062.68,mla_nsi:61567,nmv_p:5.49,nsi_p:244,mla_nmv_p:2643.3,mla_nsi_p:89045},{c:'INDOOR SPORTS',nmv:0.57,nsi:36,mla_nmv:720.69,mla_nsi:11082,nmv_p:1.05,nsi_p:32,mla_nmv_p:998.26,mla_nsi_p:17960},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:7.41,nsi:37,mla_nmv:994.33,mla_nsi:15000,nmv_p:12.63,nsi_p:80,mla_nmv_p:2104.06,mla_nsi_p:29652},{c:'LARGE APPLIANCES',nmv:51.62,nsi:103,mla_nmv:1594.28,mla_nsi:3973,nmv_p:110.64,nsi_p:248,mla_nmv_p:3002.85,mla_nsi_p:6778},{c:'LIGHTING',nmv:0.03,nsi:4,mla_nmv:544.85,mla_nsi:20102,nmv_p:0.02,nsi_p:1,mla_nmv_p:866.01,mla_nsi_p:33318},{c:'MATTRESSES & SOMMIER',nmv:17.96,nsi:79,mla_nmv:654.46,mla_nsi:1662,nmv_p:11.75,nsi_p:42,mla_nmv_p:1451.04,mla_nsi_p:3471},{c:'MOUNTAIN & OUTDOORS',nmv:6.19,nsi:313,mla_nmv:473.93,mla_nsi:10839,nmv_p:3.99,nsi_p:136,mla_nmv_p:670.05,mla_nsi_p:15576},{c:'OTHER MAINSTREAM SPORTS',nmv:0.25,nsi:7,mla_nmv:185.31,mla_nsi:2212,nmv_p:0.5,nsi_p:25,mla_nmv_p:309.51,mla_nsi_p:3988},{c:'OTHER SPORTS',nmv:0.07,nsi:1,mla_nmv:137.89,mla_nsi:2062,nmv_p:0.44,nsi_p:6,mla_nmv_p:223.06,mla_nsi_p:3446},{c:'PET',nmv:1.68,nsi:49,mla_nmv:840.44,mla_nsi:19182,nmv_p:1.94,nsi_p:38,mla_nmv_p:1186.05,mla_nsi_p:27098},{c:'SECURITY',nmv:0.14,nsi:3,mla_nmv:358.57,mla_nsi:5492,nmv_p:1.42,nsi_p:30,mla_nmv_p:749.08,mla_nsi_p:11841},{c:'SMALL APPLIANCES',nmv:21.57,nsi:253,mla_nmv:2335.03,mla_nsi:21692,nmv_p:40.1,nsi_p:614,mla_nmv_p:3306.65,mla_nsi_p:32200},{c:'SMARTPHONES & TABLETS',nmv:15.19,nsi:42,mla_nmv:3393.11,mla_nsi:17648,nmv_p:49.89,nsi_p:156,mla_nmv_p:4547.04,mla_nsi_p:27164},{c:'SPORTS ACCESSORIES',nmv:0.1,nsi:2,mla_nmv:21.03,mla_nsi:524,nmv_p:0.06,nsi_p:1,mla_nmv_p:39.71,mla_nsi_p:1081},{c:'STATIONERY',nmv:0.11,nsi:4,mla_nmv:394.72,mla_nsi:21425,nmv_p:0.12,nsi_p:6,mla_nmv_p:761.35,mla_nsi_p:42000},{c:'TELEVISIONS & STREAMING DEVICES',nmv:43.88,nsi:53,mla_nmv:757.18,mla_nsi:4544,nmv_p:120.62,nsi_p:184,mla_nmv_p:1758.43,mla_nsi_p:8912},{c:'TOOLS',nmv:2.59,nsi:54,mla_nmv:2192.45,mla_nsi:32589,nmv_p:2.97,nsi_p:51,mla_nmv_p:4406.52,mla_nsi_p:64565},{c:'TOYS AND GAMES',nmv:0.15,nsi:4,mla_nmv:728.75,mla_nsi:18014,nmv_p:0.17,nsi_p:5,mla_nmv_p:1065.58,mla_nsi_p:27000},{c:'WATER SPORTS',nmv:0.06,nsi:4,mla_nmv:43.95,mla_nsi:757,nmv_p:0.06,nsi_p:4,mla_nmv_p:61.97,mla_nsi_p:1446},{c:'WEARABLES',nmv:2.68,nsi:81,mla_nmv:621.44,mla_nsi:9049,nmv_p:1.88,nsi_p:53,mla_nmv_p:992.24,mla_nsi_p:14865}],
+    ce_cats_mom:[{c:'AUDIO & GENERAL ELECTRONICS',nmv:497.15,nsi:9103,nmv_p:955.06,nsi_p:18384},{c:'CAMERAS & DRONES',nmv:264.44,nsi:2621,nmv_p:448.31,nsi_p:4653},{c:'COMPUTERS & NOTEBOOKS',nmv:805.77,nsi:734,nmv_p:2674.67,nsi_p:2343},{c:'CONSOLE GAMING HARDWARE',nmv:366.24,nsi:2213,nmv_p:770.39,nsi_p:3832},{c:'GAMES, DIGITAL GOODS & SOFTWARE',nmv:49.16,nsi:724,nmv_p:67.93,nsi_p:977},{c:'HEATING, COOLING & AIR QUALITY',nmv:915.29,nsi:3145,nmv_p:2161.42,nsi_p:5679},{c:'HOUSEHOLD APPLIANCES PARTS',nmv:161.8,nsi:5235,nmv_p:300.67,nsi_p:9015},{c:'IT APPLIANCES',nmv:537.72,nsi:6406,nmv_p:1264.27,nsi_p:15721},{c:'IT PERIPHERALS, PARTS & ACCESSORIES',nmv:994.33,nsi:15000,nmv_p:2104.06,nsi_p:29652},{c:'LARGE APPLIANCES',nmv:1594.28,nsi:3973,nmv_p:3002.85,nsi_p:6778},{c:'SMALL APPLIANCES',nmv:2335.03,nsi:21692,nmv_p:3306.65,nsi_p:32200},{c:'SMARTPHONES & TABLETS',nmv:3393.11,nsi:17648,nmv_p:4547.04,nsi_p:27164},{c:'TELEVISIONS & STREAMING DEVICES',nmv:757.18,nsi:4544,nmv_p:1758.43,nsi_p:8912},{c:'WEARABLES',nmv:621.44,nsi:9049,nmv_p:992.24,nsi_p:14865}],
+    ce:{site:{nmv:13.293,nsi:102100},ns:{nmv:194.7,nsi:694},yoy:{snmv:34.9,snsi:18.0,nnmv:-61.8,nnsi:-70.7,partial:false},mom:{snmv:-45.4,snsi:-43.3,nnmv:-61.7,nnsi:-56.3,ref:'vs 9/9/2026'},da:{snmv:0.1,snsi:-13.6,nnmv:33.5,nnsi:38.3,ref:'vs 09/10/2026'},sa:{snmv:46.7,snsi:27.8,nnmv:93.3,nnsi:106.6,ref:'vs 03/10/2026'}},
+    he:{site:{nmv:6.261,nsi:47700},ns:{nmv:167.91,nsi:531},yoy:{snmv:20.2,snsi:13.3,nnmv:-64.9,nnsi:-76.4,partial:false},mom:{snmv:-45.5,snsi:-41.1,nnmv:-51.2,nnsi:-55.4,ref:'vs 9/9/2026'},da:{snmv:12.1,snsi:-2.3,nnmv:45.1,nnsi:44.2,ref:'vs 09/10/2026'},sa:{snmv:51.7,snsi:36.3,nnmv:108.8,nnsi:101.8,ref:'vs 03/10/2026'}},
+    tech:{site:{nmv:7.032,nsi:54400},ns:{nmv:26.79,nsi:162},yoy:{snmv:51.5,snsi:22.5,nnmv:-16.9,nnsi:47.9,partial:false},mom:{snmv:-45.4,snsi:-45.2,nnmv:-83.7,nnsi:-58.9,ref:'vs 9/9/2026'},da:{snmv:-8.6,snsi:-21.6,nnmv:-11.0,nnsi:22.1,ref:'vs 09/10/2026'},sa:{snmv:42.6,snsi:21.2,nnmv:32.0,nnsi:123.6,ref:'vs 03/10/2026'}}
   }
 ];
 /*%%FECHAS_END%%*/
@@ -732,34 +754,34 @@ function filterBPC(v){
   });
 }
 
-const LABELS=['1/1','2/2','3/3','4/4','5/5','6/6','7/7','8/8','9/9']; /*%%LABELS%%*/
-const NMV_26=[25.396,61.89,61.493,36.292,59.124,43.311,53.287,47.179,71.988]; /*%%NMV_26%%*/
-const NMV_25=[15.348,22.083,24.153,33.458,36.343,35.598,45.213,37.697,50.97]; /*%%NMV_25%%*/
-const NSI_26=[517.1,1277.9,1271.6,743.5,1195.4,838.3,1059.9,916.2,1339.1]; /*%%NSI_26%%*/
-const NSI_25=[368.2,552.1,599.1,763.7,883.2,808.9,1057.9,894.6,1101.5]; /*%%NSI_25%%*/
-const PART=[1.381,0.835,1.034,1.27,0.957,0.899,0.97,0.692,0.724]; /*%%PART%%*/
-const PART_NSI=[0.322,0.206,0.224,0.319,0.18,0.206,0.148,0.154,0.199]; /*%%PART_NSI%%*/
-const VISITS_26=[0,0,0,0,0,0,0,0,48.824]; /*%%VISITS_26%%*/
-const VISITS_25=[0,0,0,0,0,0,0,0,36.554]; /*%%VISITS_25%%*/
-const VISITS_PART=[0,0,0,0,0,0,0,0,0.222]; /*%%VISITS_PART%%*/
-const CE_NMV_26=[7.579,18.987,20.033,11.394,18.419,14.114,16.758,13.512,22.815];
-const CE_NMV_25=[4.363,6.625,7.151,10.564,10.243,10.634,13.118,10.534,16.747];
-const CE_NSI_26=[62.1,154.9,162.0,88.0,150.5,98.3,131.8,104.5,172.1];
-const CE_NSI_25=[45.0,61.0,71.2,104.3,117.8,108.4,141.2,108.6,152.2];
-const CE_PART=[3.733,2.22,2.778,3.489,2.789,2.457,2.912,2.166,2.07];
-const CE_PART_NSI=[1.697,0.84,1.051,1.826,0.902,0.911,0.772,0.905,0.87];
-const HE_NMV_26=[3.682,8.322,8.032,5.334,8.272,6.946,8.462,5.729,10.827];
-const HE_NMV_25=[1.977,3.107,3.155,4.685,3.887,4.377,5.902,4.016,9.182];
-const HE_NSI_26=[28.1,66.4,67.2,39.1,65.3,46.2,63.6,43.1,77.6];
-const HE_NSI_25=[18.9,26.6,28.8,42.2,43.2,43.3,57.9,39.5,72.4];
-const HE_PART=[7.64,4.943,6.759,7.296,6.105,4.609,5.252,4.533,2.923];
-const HE_PART_NSI=[3.719,1.857,2.394,4.0,2.008,1.771,1.373,1.826,1.441];
-const TECH_NMV_26=[3.897,10.665,12.001,6.06,10.147,7.169,8.297,7.783,11.988];
-const TECH_NMV_25=[2.386,3.518,3.996,5.879,6.356,6.257,7.216,6.517,7.565];
-const TECH_NSI_26=[34.0,88.5,94.8,48.9,85.2,52.2,68.1,61.4,94.4];
-const TECH_NSI_25=[26.1,34.4,42.4,62.1,74.6,65.1,83.3,69.1,79.8];
-const TECH_PART=[0.041,0.096,0.113,0.138,0.086,0.372,0.524,0.423,1.299];
-const TECH_PART_NSI=[0.026,0.077,0.099,0.088,0.054,0.149,0.211,0.259,0.403];
+const LABELS=['1/1','2/2','3/3','4/4','5/5','6/6','7/7','8/8','9/9','10/10']; /*%%LABELS%%*/
+const NMV_26=[25.396,61.89,61.493,36.292,59.124,43.311,53.285,47.092,75.458,45.694]; /*%%NMV_26%%*/
+const NMV_25=[15.348,22.083,24.153,33.458,36.343,35.598,45.213,37.697,50.97,32.826]; /*%%NMV_25%%*/
+const NSI_26=[517.1,1277.9,1271.6,743.5,1195.4,838.3,1059.9,915.5,1388.5,868.6]; /*%%NSI_26%%*/
+const NSI_25=[368.2,552.1,599.1,763.7,883.2,808.9,1057.9,894.6,1101.5,739.8]; /*%%NSI_25%%*/
+const PART=[1.381,0.835,1.034,1.27,0.957,0.899,0.97,0.693,0.741,0.53]; /*%%PART%%*/
+const PART_NSI=[0.322,0.206,0.224,0.319,0.18,0.206,0.148,0.154,0.198,0.208]; /*%%PART_NSI%%*/
+const VISITS_26=[0,0,0,0,0,0,0,0,48.824,42.795]; /*%%VISITS_26%%*/
+const VISITS_25=[0,0,0,0,0,0,0,0,36.554,30.057]; /*%%VISITS_25%%*/
+const VISITS_PART=[0,0,0,0,0,0,0,0,0.222,0.155]; /*%%VISITS_PART%%*/
+const CE_NMV_26=[7.578,18.979,20.022,11.392,18.419,14.112,16.756,13.477,24.354,13.293];
+const CE_NMV_25=[4.363,6.625,7.151,10.564,10.243,10.634,13.118,10.534,16.747,9.851];
+const CE_NSI_26=[62.0,154.7,161.7,87.9,150.4,98.3,131.7,104.3,180.2,102.1];
+const CE_NSI_25=[45.0,61.0,71.2,104.3,117.8,108.4,141.2,108.6,152.2,86.5];
+const CE_PART=[3.733,2.221,2.779,3.49,2.789,2.457,2.912,2.171,2.089,1.465];
+const CE_PART_NSI=[1.7,0.841,1.053,1.828,0.902,0.911,0.772,0.907,0.882,0.68];
+const HE_NMV_26=[3.682,8.32,8.028,5.332,8.269,6.943,8.46,5.714,11.485,6.261];
+const HE_NMV_25=[1.977,3.107,3.155,4.685,3.887,4.377,5.902,4.016,9.182,5.208];
+const HE_NSI_26=[28.1,66.4,67.1,39.1,65.2,46.1,63.5,43.0,81.0,47.7];
+const HE_NSI_25=[18.9,26.6,28.8,42.2,43.2,43.3,57.9,39.5,72.4,42.1];
+const HE_PART=[7.64,4.944,6.762,7.298,6.107,4.611,5.254,4.545,2.997,2.682];
+const HE_PART_NSI=[3.719,1.857,2.398,4.0,2.011,1.774,1.375,1.83,1.473,1.114];
+const TECH_NMV_26=[3.896,10.659,11.994,6.059,10.15,7.17,8.296,7.764,12.869,7.032];
+const TECH_NMV_25=[2.386,3.518,3.996,5.879,6.356,6.257,7.216,6.517,7.565,4.643];
+const TECH_NSI_26=[34.0,88.3,94.6,48.8,85.2,52.2,68.1,61.3,99.2,54.4];
+const TECH_NSI_25=[26.1,34.4,42.4,62.1,74.6,65.1,83.3,69.1,79.8,44.4];
+const TECH_PART=[0.041,0.096,0.113,0.138,0.086,0.372,0.524,0.424,1.278,0.381];
+const TECH_PART_NSI=[0.026,0.077,0.099,0.088,0.054,0.149,0.211,0.259,0.399,0.299];
 const DEFL_YOY = 1.324; // BM3 abr-26 — acum. jul-25→jun-26 = 32.4%
 let CHART_METRIC='nmv';
 let SCOPE='total';
